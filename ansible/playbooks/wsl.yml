@@ -7,7 +7,7 @@
   pre_tasks:
     - name: WSL | Fully upgrade dnf packages
       tags: always
-      ansible.builtin.dnf:
+      ansible.builtin.dnf:  # noqa package-latest
         name: "*"
         state: latest
         update_cache: true

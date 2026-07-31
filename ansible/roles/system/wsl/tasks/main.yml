@@ -26,7 +26,7 @@
   register: wsl_distributions
   check_mode: false
 
-- name: "WSL | Install the {{ wsl_distribution }} distribution"
+- name: "WSL | Install distribution: {{ wsl_distribution }}"
   ansible.windows.win_powershell:
     script: |
       wsl.exe --install -d {{ wsl_distribution }} --no-launch

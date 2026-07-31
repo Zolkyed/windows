@@ -1,3 +1,21 @@
 ---
 cursor_scheme_name: Windows black
 cursor_destination: C:\Windows\Cursors\WindowsBlack
+cursor_scheme_files:
+  - aero_black_arrow.cur
+  - aero_black_helpsel.cur
+  - aero_black_working.ani
+  - aero_black_busy.ani
+  - aero_black_cross.cur
+  - aero_black_beam.cur
+  - aero_black_pen.cur
+  - aero_black_unavail.cur
+  - aero_black_ns.cur
+  - aero_black_ew.cur
+  - aero_black_nwse.cur
+  - aero_black_nesw.cur
+  - aero_black_move.cur
+  - aero_black_up.cur
+  - aero_black_link.cur
+  - aero_black_pin.cur
+  - aero_black_person.cur
