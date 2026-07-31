@@ -1,5 +1,6 @@
 ---
 - name: Dotfiles | Manage as user
+  become: true
   become_user: "{{ user_name }}"
   block:
     - name: Dotfiles | Clone repository

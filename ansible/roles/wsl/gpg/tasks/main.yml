@@ -11,6 +11,7 @@
   register: user_gpg_key_response
 
 - name: GPG | Derive fingerprint
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command:
     argv: [gpg, --with-colons, --import-options, show-only, --import]
@@ -19,6 +20,7 @@
   changed_when: false
 
 - name: GPG | Import signing key
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command:
     argv: [gpg, --import]
@@ -27,6 +29,7 @@
   changed_when: "'imported' in user_gpg_import.stderr"
 
 - name: GPG | Set ultimate trust
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command:
     argv: [gpg, --import-ownertrust]

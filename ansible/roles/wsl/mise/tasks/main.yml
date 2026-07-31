@@ -1,5 +1,6 @@
 ---
 - name: Mise | Download installer
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.get_url:
     url: "{{ mise_install_url }}"
@@ -8,12 +9,14 @@
   when: not (mise_bin is exists)
 
 - name: Mise | Install mise
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command:
     argv: [/tmp/mise-install.sh]
   when: not (mise_bin is exists)
 
 - name: "Mise | Install tools"
+  become: true
   become_user: "{{ user_name }}"
   ansible.builtin.command:
     argv:
