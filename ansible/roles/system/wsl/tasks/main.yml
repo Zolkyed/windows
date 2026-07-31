@@ -1,0 +1,33 @@
+---
+- name: WSL | Enable required Windows optional features
+  ansible.windows.win_optional_feature:
+    name:
+      - Microsoft-Windows-Subsystem-Linux
+      - VirtualMachinePlatform
+    state: present
+  register: wsl_features
+
+- name: WSL | Reboot if optional features were enabled
+  ansible.windows.win_reboot:
+  when: wsl_features.reboot_required | default(false)
+
+- name: WSL | Set WSL 2 as the default version
+  ansible.windows.win_powershell:
+    script: |
+      wsl.exe --set-default-version 2 | Out-Null
+      $Ansible.Changed = $false
+  changed_when: false
+
+- name: WSL | List installed distributions
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Result = @(wsl.exe --list --quiet) -join "`n"
+      $Ansible.Changed = $false
+  register: wsl_distributions
+  check_mode: false
+
+- name: "WSL | Install the {{ wsl_distribution }} distribution"
+  ansible.windows.win_powershell:
+    script: |
+      wsl.exe --install -d {{ wsl_distribution }} --no-launch
+  when: wsl_distribution not in (wsl_distributions.result | default(''))

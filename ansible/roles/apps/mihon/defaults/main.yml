@@ -1,0 +1,8 @@
+---
+mihon_url: "https://mihon.org"
+mihon_shortcut_name: Suwayomi
+mihon_icon_source: Suwayomi.ico
+mihon_icon_destination: >-
+  %LOCALAPPDATA%\Suwayomi\Suwayomi.ico
+mihon_browser_path: >-
+  %ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe

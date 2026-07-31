@@ -1,0 +1,15 @@
+---
+- name: Start menu | Disable suggested content
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager
+    name: "{{ item }}"
+    data: 0
+    type: dword
+  loop:
+    - SilentInstalledAppsEnabled
+    - SystemPaneSuggestionsEnabled
+    - SoftLandingEnabled
+    - SubscribedContent-310093Enabled
+    - SubscribedContent-338388Enabled
+    - SubscribedContent-338389Enabled
+    - SubscribedContent-88000326Enabled

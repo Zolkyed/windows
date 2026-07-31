@@ -1,0 +1,16 @@
+---
+- name: AI | Install command-line tools
+  ansible.windows.win_command:
+    argv:
+      - npm.cmd
+      - install
+      - --global
+      - "{{ item }}@latest"
+  loop: "{{ ai_npm_packages }}"
+  loop_control:
+    label: "{{ item }}"
+  register: ai_npm_install
+  changed_when: "'up to date' not in ai_npm_install.stdout"
+  until: ai_npm_install is succeeded
+  retries: "{{ ai_npm_retries }}"
+  delay: "{{ ai_npm_retry_delay }}"

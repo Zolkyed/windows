@@ -1,0 +1,6 @@
+---
+keyboard_layout_msi: US-AltGr_amd64.msi
+keyboard_layout_product_id: '{2BBDE570-43DA-465E-9BB3-7BAEC554D9A3}'
+keyboard_layout_file: US-AltGr.dll
+keyboard_layout_installer_directory: C:\Windows\Temp\Ansible
+keyboard_layout_installer_destination: '{{ keyboard_layout_installer_directory }}\US-AltGr_amd64.msi'

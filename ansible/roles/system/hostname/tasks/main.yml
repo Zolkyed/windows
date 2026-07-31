@@ -1,0 +1,4 @@
+---
+- name: Hostname | Configure hostname
+  ansible.windows.win_hostname:
+    name: "{{ custom_hostname }}"

@@ -1,0 +1,3 @@
+---
+samba_drive_letter: M
+samba_drive_path: '\\192.168.2.36\manga'

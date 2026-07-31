@@ -1,0 +1,49 @@
+---
+- name: Dotfiles | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Dotfiles
+    install_chocolatey_packages: "{{ dotfiles_chocolatey_packages }}"
+    install_scoop_packages: []
+    install_winget_packages: []
+
+- name: Dotfiles | Resolve source directory path
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Result = Join-Path $env:USERPROFILE '.local\share\chezmoi'
+      $Ansible.Changed = $false
+  register: chezmoi_source
+  check_mode: false
+
+- name: Dotfiles | Ensure chezmoi source directory exists
+  ansible.windows.win_file:
+    path: "{{ chezmoi_source.result }}"
+    state: directory
+
+- name: Dotfiles | Synchronize chezmoi source to Windows
+  ansible.windows.win_copy:
+    src: "{{ dotfiles_chezmoi_source_dir }}"
+    dest: "{{ chezmoi_source.result }}\\"
+
+- name: Dotfiles | Check managed state
+  ansible.windows.win_command:
+    argv:
+      - chezmoi.exe
+      - status
+      - --exclude
+      - scripts
+  register: chezmoi_status
+  changed_when: false
+  check_mode: false
+
+- name: Dotfiles | Apply managed state
+  ansible.windows.win_command:
+    argv:
+      - chezmoi.exe
+      - apply
+      - --no-tty
+      - --force
+      - --exclude
+      - scripts
+  when: chezmoi_status.stdout | trim | length > 0

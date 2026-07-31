@@ -1,0 +1,17 @@
+---
+- name: Base | Configure wsl.conf
+  ansible.builtin.template:
+    src: wsl.conf.j2
+    dest: "{{ base_wsl_conf_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Base | Configure passwordless sudo
+  ansible.builtin.template:
+    src: sudoers.j2
+    dest: "{{ base_sudoers_path }}"
+    owner: root
+    group: root
+    mode: "0440"
+    validate: "visudo -cf %s"

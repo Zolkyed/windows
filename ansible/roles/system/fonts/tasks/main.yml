@@ -1,0 +1,9 @@
+---
+- name: Fonts | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Fonts
+    install_chocolatey_packages: "{{ fonts_chocolatey_packages }}"
+    install_scoop_packages: []
+    install_winget_packages: []

@@ -1,0 +1,9 @@
+---
+- name: Gaming | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Gaming
+    install_chocolatey_packages: "{{ gaming_chocolatey_packages }}"
+    install_scoop_packages: []
+    install_winget_packages: []

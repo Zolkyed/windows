@@ -1,0 +1,11 @@
+---
+- name: Execution policy | Allow PowerShell profiles for the current user
+  ansible.windows.win_powershell:
+    script: |
+      if ((Get-ExecutionPolicy -Scope CurrentUser) -ne 'RemoteSigned') {
+        Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+        $Ansible.Changed = $true
+      }
+      else {
+        $Ansible.Changed = $false
+      }

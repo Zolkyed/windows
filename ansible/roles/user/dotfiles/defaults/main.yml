@@ -1,0 +1,5 @@
+---
+dotfiles_chocolatey_packages:
+  - chezmoi
+
+dotfiles_chezmoi_source_dir: "{{ playbook_dir }}/../../chezmoi/"

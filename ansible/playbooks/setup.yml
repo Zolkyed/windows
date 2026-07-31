@@ -1,0 +1,85 @@
+---
+- name: Configure Windows
+  hosts: all
+  gather_facts: false
+
+  roles:
+    # wsl
+    - role: system/wsl
+      tags: wsl
+
+    # system
+    - role: system/hostname
+      tags: hostname
+    - role: system/debloater
+      tags: debloater
+    - role: system/mouse
+      tags: mouse
+    - role: system/cursor
+      tags: cursor
+    - role: system/keyboard
+      tags: keyboard
+    - role: system/sign_in
+      tags: sign_in
+    - role: system/desktop
+      tags: desktop
+    - role: system/wallpaper
+      tags: wallpaper
+    - role: system/explorer
+      tags: explorer
+    - role: system/start_menu
+      tags: start_menu
+    - role: system/sounds
+      tags: sounds
+    - role: system/notifications
+      tags: notifications
+    - role: system/taskbar
+      tags: taskbar
+    - role: system/execution_policy
+      tags: execution_policy
+    - role: system/fonts
+      tags: fonts
+    - role: system/samba
+      tags: samba
+
+    # apps
+    - role: apps/dev
+      tags: dev
+    - role: apps/ai
+      tags: ai
+    - role: apps/browser
+      tags: browser
+    - role: apps/mihon
+      tags: mihon
+    - role: apps/vpn
+      tags: vpn
+    - role: apps/downloader
+      tags: downloader
+    - role: apps/google_drive
+      tags: google_drive
+    - role: apps/emulation
+      tags: emulation
+    - role: apps/media
+      tags: media
+    - role: apps/gaming
+      tags: gaming
+    - role: apps/communication
+      tags: communication
+    - role: apps/vscode
+      tags: vscode
+
+    # user
+    - role: user/ssh
+      tags: ssh
+    - role: user/gpg
+      tags: gpg
+    - role: user/shell
+      tags: shell
+    - role: user/bin
+      tags: bin
+    - role: user/dotfiles
+      tags: dotfiles
+
+    # wsl bootstrap
+    - role: wsl/bootstrap
+      tags: wsl_bootstrap

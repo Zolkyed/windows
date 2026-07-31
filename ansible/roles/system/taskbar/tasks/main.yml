@@ -1,0 +1,17 @@
+---
+- name: Taskbar | Hide Search
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Search
+    name: SearchboxTaskbarMode
+    data: 0
+    type: dword
+
+- name: Taskbar | Hide Task View and Widgets
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: "{{ item }}"
+    data: 0
+    type: dword
+  loop:
+    - ShowTaskViewButton
+    - TaskbarDa

@@ -1,0 +1,63 @@
+---
+- name: VSCode | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: VSCode
+    install_chocolatey_packages: "{{ vscode_chocolatey_packages }}"
+    install_scoop_packages: []
+    install_winget_packages: []
+
+- name: VSCode | Find CLI
+  ansible.windows.win_powershell:
+    script: |
+      $candidates = @(
+        (Join-Path $env:ProgramFiles 'Microsoft VS Code\bin\code.cmd'),
+        (Join-Path $env:LOCALAPPDATA 'Programs\Microsoft VS Code\bin\code.cmd'),
+        (Join-Path $env:ChocolateyInstall 'bin\code.cmd')
+      )
+      $code = $candidates |
+        Where-Object { $_ -and (Test-Path -LiteralPath $_) } |
+        Select-Object -First 1
+
+      if (-not $code) {
+        throw "Visual Studio Code CLI was not found."
+      }
+
+      $Ansible.Result = $code
+      $Ansible.Changed = $false
+  register: vscode_cli
+  check_mode: false
+
+- name: VSCode | List installed extensions
+  ansible.windows.win_command:
+    argv:
+      - cmd.exe
+      - /d
+      - /c
+      - "{{ vscode_cli.result }}"
+      - --list-extensions
+  register: vscode_installed_extensions
+  changed_when: false
+  check_mode: false
+
+- name: VSCode | Install extensions
+  ansible.windows.win_command:
+    argv:
+      - cmd.exe
+      - /d
+      - /c
+      - "{{ vscode_cli.result }}"
+      - --install-extension
+      - "{{ item }}"
+      - --force
+  loop: "{{ vscode_extensions }}"
+  loop_control:
+    label: "{{ item }}"
+  when: >-
+    (item | lower) not in
+    (vscode_installed_extensions.stdout_lines | map('lower') | list)
+  register: vscode_extension_result
+  until: vscode_extension_result is succeeded
+  retries: "{{ vscode_retries }}"
+  delay: "{{ vscode_retry_delay }}"

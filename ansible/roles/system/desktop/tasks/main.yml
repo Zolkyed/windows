@@ -1,0 +1,38 @@
+---
+- name: Desktop | Enable dark mode for apps
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
+    name: AppsUseLightTheme
+    data: 0
+    type: dword
+
+- name: Desktop | Enable dark mode for Windows
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
+    name: SystemUsesLightTheme
+    data: 0
+    type: dword
+
+- name: Desktop | Resolve desktop directory paths
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Result = @(
+        [Environment]::GetFolderPath('CommonDesktopDirectory')
+        [Environment]::GetFolderPath('Desktop')
+      ) | Where-Object { $_ } | Select-Object -Unique
+      $Ansible.Changed = $false
+  register: desktop_directories
+  check_mode: false
+
+- name: Desktop | Find shortcuts
+  ansible.windows.win_find:
+    paths: "{{ desktop_directories.result }}"
+    patterns: "*.lnk"
+  register: shortcuts
+
+- name: Desktop | Remove shortcuts
+  ansible.windows.win_file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ shortcuts.files | unique }}"
+  when: shortcuts.files | length > 0

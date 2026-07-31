@@ -1,0 +1,25 @@
+---
+downloader_chocolatey_packages:
+  # IRC client
+  - hexchat
+  # Image gallery downloader
+  - gallery-dl
+  # Media downloader
+  - yt-dlp
+  # BitTorrent client
+  - qbittorrent
+
+downloader_winget_packages:
+  # JDownloader's maintained Windows package.
+  - AppWork.JDownloader
+
+downloader_directory_name: Transfers
+downloader_pin_directory_to_quick_access: true
+downloader_gallerydl_directory_name: gallery-dl
+downloader_ytdlp_directory_name: yt-dlp
+downloader_qbittorrent_directory_name: qBittorrent
+downloader_jdownloader_directory_name: JDownloader
+downloader_hexchat_directory_name: HexChat
+
+downloader_qbittorrent_max_seeding_minutes: 0
+downloader_jdownloader_install_directory_name: JDownloader

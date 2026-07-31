@@ -1,0 +1,32 @@
+---
+- name: WSL bootstrap | Deploy bootstrap script
+  ansible.windows.win_copy:
+    src: bootstrap.sh
+    dest: "{{ wsl_bootstrap_script_path }}"
+
+- name: WSL bootstrap | Run bootstrap script inside WSL
+  ansible.windows.win_powershell:
+    parameters:
+      Distribution: "{{ wsl_bootstrap_distribution }}"
+      WslUser: "{{ wsl_bootstrap_user }}"
+      ScriptPath: "{{ wsl_bootstrap_script_path }}"
+    script: |
+      param(
+        [string]$Distribution,
+        [string]$WslUser,
+        [string]$ScriptPath
+      )
+
+      $wslPath = (& wsl.exe -d $Distribution -u root -- wslpath -a $ScriptPath).Trim()
+
+      $output = & wsl.exe -d $Distribution -u root -- env "WSL_USER=$WslUser" `
+        bash $wslPath 2>&1
+      if ($LASTEXITCODE -ne 0) {
+        throw "WSL bootstrap failed ($LASTEXITCODE): $(
+          $output -join [Environment]::NewLine
+        )"
+      }
+
+      $Ansible.Result = $output -join [Environment]::NewLine
+  register: wsl_bootstrap_result
+  changed_when: "'WSL bootstrap complete' in wsl_bootstrap_result.result"

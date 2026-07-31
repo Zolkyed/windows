@@ -1,0 +1,157 @@
+---
+- name: Packages | Ensure Scoop is installed
+  ansible.windows.win_powershell:
+    script: |
+      $scoopRoot = if ($env:SCOOP) {
+        $env:SCOOP
+      }
+      else {
+        Join-Path $env:USERPROFILE 'scoop'
+      }
+      $scoop = Join-Path $scoopRoot 'shims\scoop.ps1'
+
+      if (Test-Path -LiteralPath $scoop) {
+        $Ansible.Changed = $false
+        return
+      }
+
+      $installer = Join-Path $env:TEMP (
+        "install-scoop-$([guid]::NewGuid().ToString('N')).ps1"
+      )
+
+      try {
+        Invoke-WebRequest -Uri https://get.scoop.sh -OutFile $installer `
+          -ErrorAction Stop
+
+        $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $principal = [Security.Principal.WindowsPrincipal]::new($identity)
+        $isAdministrator = $principal.IsInRole(
+          [Security.Principal.WindowsBuiltInRole]::Administrator
+        )
+
+        $arguments = @(
+          '-NoProfile',
+          '-NonInteractive',
+          '-ExecutionPolicy',
+          'Bypass',
+          '-File',
+          $installer
+        )
+        if ($isAdministrator) {
+          $arguments += @('-RunAsAdmin')
+        }
+
+        $output = & powershell.exe @arguments 2>&1
+        if ($LASTEXITCODE -ne 0) {
+          throw "Scoop installation failed ($LASTEXITCODE): $(
+            $output -join [Environment]::NewLine
+          )"
+        }
+
+        if (-not (Test-Path -LiteralPath $scoop)) {
+          throw "Scoop installation completed without creating $scoop"
+        }
+
+        $Ansible.Changed = $true
+      }
+      finally {
+        Remove-Item -LiteralPath $installer -Force -ErrorAction SilentlyContinue
+      }
+  register: packages_scoop_install_result
+  until: packages_scoop_install_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"
+
+- name: "Packages | Manage Scoop packages for {{ install_label }}"
+  ansible.windows.win_powershell:
+    parameters:
+      PackageName: "{{ item.name | default(item) }}"
+      PackageState: "{{ item.state | default('present') }}"
+      PackageVersion: "{{ item.version | default('') }}"
+    script: |
+      param(
+        [string]$PackageName,
+        [string]$PackageState,
+        [string]$PackageVersion
+      )
+
+      if ($PackageState -notin @('present', 'absent', 'latest')) {
+        throw "Unsupported Scoop package state: $PackageState"
+      }
+
+      $scoopRoot = if ($env:SCOOP) {
+        $env:SCOOP
+      }
+      else {
+        Join-Path $env:USERPROFILE 'scoop'
+      }
+      $scoop = Join-Path $scoopRoot 'shims\scoop.ps1'
+
+      if (-not (Test-Path -LiteralPath $scoop)) {
+        throw "Scoop is not available at $scoop"
+      }
+
+      $appName = ($PackageName -split '[/\\]')[-1]
+      $appName = ($appName -split '@')[0]
+      $currentPath = Join-Path $scoopRoot "apps\$appName\current"
+      $installed = Test-Path -LiteralPath $currentPath
+
+      function Invoke-Scoop {
+        param([string[]]$Arguments)
+
+        $output = & $scoop @Arguments 2>&1
+        if ($LASTEXITCODE -ne 0) {
+          throw "Scoop failed ($LASTEXITCODE): $($output -join [Environment]::NewLine)"
+        }
+        $output
+      }
+
+      switch ($PackageState) {
+        'absent' {
+          if ($installed) {
+            Invoke-Scoop @('uninstall', $appName) | Out-Null
+            $Ansible.Changed = $true
+          }
+          else {
+            $Ansible.Changed = $false
+          }
+        }
+        'latest' {
+          if (-not $installed) {
+            Invoke-Scoop @('install', $PackageName) | Out-Null
+            $Ansible.Changed = $true
+            return
+          }
+
+          $versionBefore = Split-Path (
+            Get-Item -LiteralPath $currentPath
+          ).Target -Leaf
+          Invoke-Scoop @('update', $appName) | Out-Null
+          $versionAfter = Split-Path (
+            Get-Item -LiteralPath $currentPath
+          ).Target -Leaf
+          $Ansible.Changed = $versionBefore -ne $versionAfter
+        }
+        'present' {
+          if ($installed) {
+            $Ansible.Changed = $false
+            return
+          }
+
+          $packageSpec = if ($PackageVersion) {
+            "$PackageName@$PackageVersion"
+          }
+          else {
+            $PackageName
+          }
+          Invoke-Scoop @('install', $packageSpec) | Out-Null
+          $Ansible.Changed = $true
+        }
+      }
+  loop: "{{ install_scoop_packages }}"
+  loop_control:
+    label: "{{ item.name | default(item) }}"
+  register: packages_scoop_result
+  until: packages_scoop_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"

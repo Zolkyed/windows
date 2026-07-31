@@ -1,0 +1,96 @@
+---
+browser_chocolatey_packages:
+  - brave
+
+brave_policy_dword:
+  BraveRewardsDisabled: 1
+  BraveWalletDisabled: 1
+  BraveVPNDisabled: 1
+  BraveAIChatEnabled: 0
+  BraveNewsDisabled: 1
+  BraveTalkDisabled: 1
+  TorDisabled: 1
+  BraveSpeedreaderEnabled: 0
+  BraveWaybackMachineEnabled: 0
+  BravePlaylistEnabled: 0
+  BraveP3AEnabled: 0
+  BraveStatsPingEnabled: 0
+  BraveWebDiscoveryEnabled: 0
+
+  # Sign-in / sync
+  BrowserSignin: 0
+  SyncDisabled: 1
+  BackgroundModeEnabled: 0
+  MetricsReportingEnabled: 0
+  ComponentUpdatesEnabled: 1
+  HighEfficiencyModeEnabled: 1
+  SafeBrowsingProtectionLevel: 2
+  AlternateErrorPagesEnabled: 0
+  # Prefetch likely pages and resolve DNS proactively for faster navigation.
+  NetworkPredictionOptions: 0
+  SearchSuggestEnabled: 0
+  PaymentMethodQueryEnabled: 0
+  UserFeedbackAllowed: 0
+  SpellcheckEnabled: 0
+  HttpsUpgradesEnabled: 1
+  # Autofill
+  AutofillAddressEnabled: 0
+  AutofillCreditCardEnabled: 0
+  PasswordManagerEnabled: 0
+  TranslateEnabled: 0
+  DeveloperToolsAvailability: 0
+  IncognitoModeAvailability: 0
+  BrowserAddPersonEnabled: 0
+  BrowserGuestModeEnabled: 0
+  DefaultBrowserSettingEnabled: 0
+  BookmarkBarEnabled: 0
+  ShowHomeButton: 0
+  DownloadRestrictions: 0
+  PromptForDownloadLocation: 1
+  PrintingEnabled: 1
+
+brave_extension_settings:
+  # Bitwarden
+  nngceckbapebfimnlniiiahkandclblb:
+    installation_mode: force_installed
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: force_pinned
+  # Smooth Key Scroll
+  gphmhpfbknciemgfnfhjapilmcaecljh:
+    installation_mode: force_installed
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_unpinned
+  # Stylus
+  clngdbkpkpeebahjckkjfobafhncgmne:
+    installation_mode: force_installed
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_pinned
+  # Animouto
+  ilhjhegbgdghfkdgeahkpikkjgaaoklh:
+    installation_mode: force_installed
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_pinned
+  # Violentmonkey
+  jinjaccalgkegednnccohejagnlnfdag:
+    installation_mode: force_installed
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_pinned
+  # Image Downloader
+  cnpniohnfphhjihaiiggeabnkjhpaldj:
+    installation_mode: force_installed
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_unpinned
+  # FoxyProxy Standard
+  gcknhkkoolaabfmlnjonogaaifnjlfnp:
+    installation_mode: force_installed
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: force_pinned
+  # MyJDownloader
+  fbcohnmimjicjdomonkcbcpbpnhggkip:
+    installation_mode: force_installed
+    update_url: https://clients2.google.com/service/update2/crx
+    toolbar_pin: default_unpinned
+  # Catppuccin Chrome Theme - Mocha
+  bkkmolkhemgaeaeggcmfbghljjjoofoh:
+    installation_mode: force_installed
+    update_url: https://clients2.google.com/service/update2/crx

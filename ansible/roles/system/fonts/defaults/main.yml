@@ -1,0 +1,6 @@
+---
+fonts_chocolatey_packages:
+  - nerd-fonts-firacode
+  - nerd-fonts-jetbrainsmono
+  - nerd-fonts-meslo
+  - nerd-fonts-nerdfontssymbolsonly

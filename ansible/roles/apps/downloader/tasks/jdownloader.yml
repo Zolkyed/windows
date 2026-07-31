@@ -1,0 +1,43 @@
+---
+- name: Downloader | Stop JDownloader before configuring it
+  ansible.windows.win_powershell:
+    script: |
+      $processes = @(Get-Process -Name JDownloader2 -ErrorAction SilentlyContinue)
+      if ($processes.Count -eq 0) {
+        $Ansible.Changed = $false
+        return
+      }
+
+      $processes | Stop-Process -Force
+      $Ansible.Changed = $true
+
+- name: Downloader | Configure JDownloader download directory
+  ansible.windows.win_powershell:
+    parameters:
+      ConfigPath: "{{ downloader_paths.result.jdownloaderConfig }}"
+      DownloadPath: "{{ downloader_paths.result.jdownloader }}"
+    script: |
+      param(
+        [string]$ConfigPath,
+        [string]$DownloadPath
+      )
+
+      $configuration = [pscustomobject]@{}
+      if (Test-Path -LiteralPath $ConfigPath) {
+        $rawConfiguration = Get-Content -LiteralPath $ConfigPath -Raw
+        if (-not [string]::IsNullOrWhiteSpace($rawConfiguration)) {
+          $configuration = $rawConfiguration | ConvertFrom-Json
+        }
+      }
+
+      if ($configuration.defaultdownloadfolder -eq $DownloadPath) {
+        $Ansible.Changed = $false
+        return
+      }
+
+      $configuration |
+        Add-Member -NotePropertyName defaultdownloadfolder `
+          -NotePropertyValue $DownloadPath -Force
+      $json = $configuration | ConvertTo-Json -Depth 100
+      Set-Content -LiteralPath $ConfigPath -Value $json -Encoding UTF8
+      $Ansible.Changed = $true

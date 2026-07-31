@@ -1,0 +1,10 @@
+---
+# No Fedora package; installed via the official script
+mise_install_url: https://mise.run
+mise_bin: "{{ user_home }}/.local/bin/mise"
+
+# Tools
+mise_tools:
+  - node@lts
+  - rust@stable
+  - go@latest

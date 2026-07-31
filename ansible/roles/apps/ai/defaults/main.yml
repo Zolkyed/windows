@@ -1,0 +1,7 @@
+---
+ai_npm_retries: 3
+ai_npm_retry_delay: 5
+
+ai_npm_packages:
+  - "@openai/codex"
+  - "@anthropic-ai/claude-code"

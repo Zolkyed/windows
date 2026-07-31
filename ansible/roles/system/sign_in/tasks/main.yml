@@ -1,0 +1,14 @@
+---
+- name: Sign-in | Do not restore previous folder windows
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: PersistBrowsers
+    data: 0
+    type: dword
+
+- name: Sign-in | Do not restart apps after sign-in
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon
+    name: RestartApps
+    data: 0
+    type: dword

@@ -1,0 +1,6 @@
+---
+- name: Debloater | Remove bloatware
+  ansible.windows.win_package:
+    product_id: "{{ item }}"
+    state: absent
+  loop: "{{ bloatware }}"

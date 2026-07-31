@@ -1,0 +1,32 @@
+---
+- name: Downloader | Configure HexChat network list
+  ansible.windows.win_copy:
+    src: hexchat/servlist.conf
+    dest: "{{ downloader_paths.result.hexchatConfigDirectory }}\\servlist.conf"
+
+- name: Downloader | Configure HexChat colors
+  ansible.windows.win_copy:
+    src: hexchat/colors.conf
+    dest: "{{ downloader_paths.result.hexchatConfigDirectory }}\\colors.conf"
+
+- name: Downloader | Configure HexChat preferences
+  community.windows.win_lineinfile:
+    path: "{{ downloader_paths.result.hexchatConfigDirectory }}\\hexchat.conf"
+    regexp: "^{{ item.key | regex_escape }} ="
+    line: "{{ item.key }} = {{ item.value }}"
+    create: true
+  loop:
+    - key: dcc_auto_recv
+      value: "2"
+    - key: dcc_completed_dir
+      value: "{{ downloader_paths.result.hexchatComplete }}"
+    - key: dcc_dir
+      value: "{{ downloader_paths.result.hexchatIncomplete }}"
+    - key: gui_autoopen_recv
+      value: "0"
+    - key: gui_autoopen_send
+      value: "0"
+    - key: gui_slist_skip
+      value: "1"
+  loop_control:
+    label: "{{ item.key }}"

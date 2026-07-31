@@ -1,0 +1,4 @@
+---
+# User
+user_name: "charl"
+user_home: "/home/{{ user_name }}"

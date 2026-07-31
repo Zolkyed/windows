@@ -1,0 +1,4 @@
+---
+bin_source_dir: AHK/
+bin_windows_startup_dir: >-
+  Microsoft\Windows\Start Menu\Programs\Startup

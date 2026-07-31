@@ -1,0 +1,96 @@
+---
+- name: Packages | Ensure Microsoft WinGet PowerShell module is installed
+  ansible.windows.win_powershell:
+    script: |
+      $module = Get-Module -ListAvailable -Name Microsoft.WinGet.Client |
+        Sort-Object Version -Descending |
+        Select-Object -First 1
+
+      if ($null -eq $module) {
+        Install-PackageProvider -Name NuGet -Force | Out-Null
+        Install-Module -Name Microsoft.WinGet.Client -Repository PSGallery `
+          -Scope AllUsers -Force -AcceptLicense
+        $Ansible.Changed = $true
+      }
+      else {
+        $Ansible.Changed = $false
+      }
+
+- name: Packages | Ensure WinGet package manager is available
+  ansible.windows.win_powershell:
+    script: |
+      Import-Module Microsoft.WinGet.Client
+      Assert-WinGetPackageManager -Latest
+      $Ansible.Changed = $false
+
+- name: "Packages | Manage WinGet packages for {{ install_label }}"
+  ansible.windows.win_powershell:
+    parameters:
+      PackageId: "{{ item.name | default(item) }}"
+      PackageState: "{{ item.state | default('present') }}"
+      PackageVersion: "{{ item.version | default('') }}"
+      PackageSource: "{{ item.source | default('winget') }}"
+    script: |
+      param(
+        [string]$PackageId,
+        [string]$PackageState,
+        [string]$PackageVersion,
+        [string]$PackageSource
+      )
+
+      Import-Module Microsoft.WinGet.Client
+
+      $installed = Get-WinGetPackage -Id $PackageId -MatchOption Equals |
+        Select-Object -First 1
+
+      if ($PackageState -eq 'absent') {
+        if ($null -eq $installed) {
+          $Ansible.Changed = $false
+          return
+        }
+
+        $result = Uninstall-WinGetPackage -Id $PackageId `
+          -MatchOption Equals -Mode Silent
+        if ($result.Status -ne 'Ok') {
+          throw "WinGet failed to uninstall $PackageId ($($result.Status))"
+        }
+        $Ansible.Changed = $true
+        return
+      }
+
+      $parameters = @{
+        Id = $PackageId
+        MatchOption = 'Equals'
+        Mode = 'Silent'
+        Source = $PackageSource
+      }
+      if ($PackageVersion) {
+        $parameters.Version = $PackageVersion
+      }
+
+      if ($null -eq $installed) {
+        $result = Install-WinGetPackage @parameters
+        if ($result.Status -ne 'Ok') {
+          throw "WinGet failed to install $PackageId ($($result.Status))"
+        }
+        $Ansible.Changed = $true
+        return
+      }
+
+      if ($PackageState -eq 'latest') {
+        $result = Update-WinGetPackage @parameters
+        if ($result.Status -notin @('Ok', 'NoApplicableUpgrade')) {
+          throw "WinGet failed to update $PackageId ($($result.Status))"
+        }
+        $Ansible.Changed = $result.Status -eq 'Ok'
+        return
+      }
+
+      $Ansible.Changed = $false
+  loop: "{{ install_winget_packages }}"
+  loop_control:
+    label: "{{ item.name | default(item) }}"
+  register: packages_winget_result
+  until: packages_winget_result is succeeded
+  retries: "{{ packages_retries }}"
+  delay: "{{ packages_retry_delay }}"

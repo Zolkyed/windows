@@ -1,0 +1,14 @@
+---
+- name: Notifications | Disable toast notifications
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\PushNotifications
+    name: ToastEnabled
+    data: 0
+    type: dword
+
+- name: Notifications | Disable Notification Center
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Policies\Microsoft\Windows\Explorer
+    name: DisableNotificationCenter
+    data: 1
+    type: dword

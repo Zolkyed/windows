@@ -1,0 +1,16 @@
+---
+shell_user_shell: /usr/bin/zsh
+shell_root_shell: /bin/bash
+
+shell_dnf_packages:
+  - atuin
+  - bash-completion
+  - fzf
+  - zoxide
+  - zsh
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+
+# Prompt (no Fedora package; installed via the official script)
+shell_starship_install_url: https://starship.rs/install.sh
+shell_starship_bin: /usr/local/bin/starship

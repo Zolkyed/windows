@@ -1,0 +1,6 @@
+---
+- name: Samba | Map manga share
+  community.windows.win_mapped_drive:
+    letter: "{{ samba_drive_letter }}"
+    path: "{{ samba_drive_path }}"
+    state: present

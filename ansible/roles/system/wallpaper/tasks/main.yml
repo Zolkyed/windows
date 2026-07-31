@@ -1,0 +1,34 @@
+---
+- name: Wallpaper | Resolve destination path
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Result = [Environment]::ExpandEnvironmentVariables(
+          '{{ wallpaper_destination }}'
+      )
+      $Ansible.Changed = $false
+  register: wallpaper_resolved_destination
+  check_mode: false
+
+- name: Wallpaper | Ensure destination directory exists
+  ansible.windows.win_file:
+    path: "{{ wallpaper_resolved_destination.result | win_dirname }}"
+    state: directory
+
+- name: Wallpaper | Copy image
+  ansible.windows.win_copy:
+    src: "{{ wallpaper_source }}"
+    dest: "{{ wallpaper_resolved_destination.result }}"
+
+- name: Wallpaper | Configure desktop registry values
+  ansible.windows.win_regedit:
+    path: HKCU:\Control Panel\Desktop
+    name: "{{ item.name }}"
+    data: "{{ item.data }}"
+    type: string
+  loop:
+    - name: Wallpaper
+      data: "{{ wallpaper_resolved_destination.result }}"
+    - name: WallpaperStyle
+      data: "{{ wallpaper_style }}"
+    - name: TileWallpaper
+      data: "0"

@@ -1,0 +1,54 @@
+---
+- name: Explorer | Show file extensions
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: HideFileExt
+    data: 0
+    type: dword
+
+- name: Explorer | Open to This PC
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: LaunchTo
+    data: 1
+    type: dword
+
+- name: Explorer | Enable classic context menu
+  ansible.windows.win_regedit:
+    path: >
+      HKCU:\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32
+    data: ""
+    type: string
+    state: present
+
+- name: Explorer | Hide Edit in Notepad for the current user
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked
+    name: "{CA6CC9F1-867A-481E-951E-A28C5E4F01EA}"
+    data: ""
+    type: string
+    state: present
+
+- name: Explorer | Hide Home from the navigation pane
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Classes\CLSID\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}
+    name: System.IsPinnedToNameSpaceTree
+    data: 0
+    type: dword
+    state: present
+
+- name: Explorer | Hide Gallery from the navigation pane
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}
+    name: System.IsPinnedToNameSpaceTree
+    data: 0
+    type: dword
+    state: present
+
+- name: Explorer | Hide personal OneDrive from the navigation pane
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Classes\CLSID\{018d5c66-4533-4307-9b53-224de2ed1fe6}
+    name: System.IsPinnedToNameSpaceTree
+    data: 0
+    type: dword
+    state: present

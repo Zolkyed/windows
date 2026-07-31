@@ -1,0 +1,126 @@
+---
+- name: Downloader | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Downloader
+    install_chocolatey_packages: "{{ downloader_chocolatey_packages }}"
+    install_scoop_packages: []
+    install_winget_packages: "{{ downloader_winget_packages }}"
+
+- name: Downloader | Resolve Windows paths
+  ansible.windows.win_powershell:
+    parameters:
+      DownloadRootName: "{{ downloader_directory_name }}"
+      GalleryDlName: "{{ downloader_gallerydl_directory_name }}"
+      YtDlpName: "{{ downloader_ytdlp_directory_name }}"
+      QBittorrentName: "{{ downloader_qbittorrent_directory_name }}"
+      JDownloaderName: "{{ downloader_jdownloader_directory_name }}"
+      HexChatName: "{{ downloader_hexchat_directory_name }}"
+      JDownloaderInstallName: "{{ downloader_jdownloader_install_directory_name }}"
+    script: |
+      param(
+        [string]$DownloadRootName,
+        [string]$GalleryDlName,
+        [string]$YtDlpName,
+        [string]$QBittorrentName,
+        [string]$JDownloaderName,
+        [string]$HexChatName,
+        [string]$JDownloaderInstallName
+      )
+
+      $downloadRoot = Join-Path $env:USERPROFILE $DownloadRootName
+      $qbittorrentRoot = Join-Path $downloadRoot $QBittorrentName
+      $hexchatRoot = Join-Path $downloadRoot $HexChatName
+      $qbittorrentComplete = Join-Path $qbittorrentRoot 'Complete'
+      $qbittorrentIncomplete = Join-Path $qbittorrentRoot 'Incomplete'
+
+      $Ansible.Result = @{
+        downloadRoot = $downloadRoot
+        galleryDl = Join-Path $downloadRoot $GalleryDlName
+        ytDlp = Join-Path $downloadRoot $YtDlpName
+        qbittorrentComplete = $qbittorrentComplete
+        qbittorrentCompleteConfig = $qbittorrentComplete.Replace('\', '/') + '/'
+        qbittorrentIncomplete = $qbittorrentIncomplete
+        qbittorrentIncompleteConfig = $qbittorrentIncomplete.Replace('\', '/') + '/'
+        jdownloader = Join-Path $downloadRoot $JDownloaderName
+        hexchatComplete = Join-Path $hexchatRoot 'Complete'
+        hexchatIncomplete = Join-Path $hexchatRoot 'Incomplete'
+        qbittorrentConfig = Join-Path $env:APPDATA 'qBittorrent\qBittorrent.ini'
+        hexchatConfigDirectory = Join-Path $env:APPDATA 'HexChat'
+        jdownloaderConfig = Join-Path $env:ProgramFiles (
+          "$JDownloaderInstallName\cfg\org.jdownloader.settings.GeneralSettings.json"
+        )
+      }
+      $Ansible.Changed = $false
+  register: downloader_paths
+  check_mode: false
+
+- name: Downloader | Ensure download and configuration directories exist
+  ansible.windows.win_file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ downloader_paths.result.galleryDl }}"
+    - "{{ downloader_paths.result.ytDlp }}"
+    - "{{ downloader_paths.result.qbittorrentComplete }}"
+    - "{{ downloader_paths.result.qbittorrentIncomplete }}"
+    - "{{ downloader_paths.result.jdownloader }}"
+    - "{{ downloader_paths.result.hexchatComplete }}"
+    - "{{ downloader_paths.result.hexchatIncomplete }}"
+    - "{{ downloader_paths.result.qbittorrentConfig | win_dirname }}"
+    - "{{ downloader_paths.result.hexchatConfigDirectory }}"
+    - "{{ downloader_paths.result.jdownloaderConfig | win_dirname }}"
+
+- name: Downloader | Pin download directory to File Explorer Quick access
+  ansible.windows.win_powershell:
+    parameters:
+      FolderPath: "{{ downloader_paths.result.downloadRoot }}"
+    script: |
+      param([string]$FolderPath)
+
+      $shell = New-Object -ComObject Shell.Application
+      $quickAccess = $shell.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}')
+      if (-not $quickAccess) {
+        throw 'File Explorer Quick access is unavailable.'
+      }
+
+      $normalizedPath = [IO.Path]::GetFullPath($FolderPath).TrimEnd('\')
+      $isPinned = @($quickAccess.Items()) |
+        Where-Object {
+          $_.Path -and
+          [IO.Path]::GetFullPath($_.Path).TrimEnd('\') -ieq $normalizedPath
+        }
+
+      if ($isPinned) {
+        $Ansible.Changed = $false
+        return
+      }
+
+      $folder = $shell.Namespace($normalizedPath)
+      if (-not $folder) {
+        throw "Cannot open download directory: $normalizedPath"
+      }
+
+      $folder.Self.InvokeVerb('pintohome')
+
+      $isPinned = @($quickAccess.Items()) |
+        Where-Object {
+          $_.Path -and
+          [IO.Path]::GetFullPath($_.Path).TrimEnd('\') -ieq $normalizedPath
+        }
+      if (-not $isPinned) {
+        throw "Windows did not pin the directory to Quick access: $normalizedPath"
+      }
+
+      $Ansible.Changed = $true
+  when: downloader_pin_directory_to_quick_access | bool
+
+- name: Downloader | Configure JDownloader
+  ansible.builtin.include_tasks: jdownloader.yml
+
+- name: Downloader | Configure qBittorrent
+  ansible.builtin.include_tasks: qbittorrent.yml
+
+- name: Downloader | Configure HexChat
+  ansible.builtin.include_tasks: hexchat.yml

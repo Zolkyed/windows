@@ -1,0 +1,78 @@
+---
+- name: Mihon | Resolve shortcut paths
+  ansible.windows.win_powershell:
+    script: |
+      $taskbar = Join-Path $env:APPDATA (
+        'Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar'
+      )
+      $Ansible.Result = @{
+        browser = [Environment]::ExpandEnvironmentVariables(
+          '{{ mihon_browser_path }}'
+        )
+        icon = [Environment]::ExpandEnvironmentVariables(
+          '{{ mihon_icon_destination }}'
+        )
+        shortcut = Join-Path $taskbar '{{ mihon_shortcut_name }}.lnk'
+      }
+      $Ansible.Changed = $false
+  register: mihon_paths
+  check_mode: false
+
+- name: Mihon | Ensure icon directory exists
+  ansible.windows.win_file:
+    path: "{{ mihon_paths.result.icon | win_dirname }}"
+    state: directory
+
+- name: Mihon | Copy icon
+  ansible.windows.win_copy:
+    src: "{{ mihon_icon_source }}"
+    dest: "{{ mihon_paths.result.icon }}"
+
+- name: Mihon | Ensure taskbar pins directory exists
+  ansible.windows.win_file:
+    path: "{{ mihon_paths.result.shortcut | win_dirname }}"
+    state: directory
+
+- name: Mihon | Create taskbar shortcut
+  ansible.windows.win_powershell:
+    script: |
+      $shortcutPath = '{{ mihon_paths.result.shortcut }}'
+      $targetPath = '{{ mihon_paths.result.browser }}'
+      $arguments = '--app={{ mihon_url }}'
+      $iconPath = '{{ mihon_paths.result.icon }}'
+      $shell = New-Object -ComObject WScript.Shell
+      $shortcut = $shell.CreateShortcut($shortcutPath)
+      $currentIcon = ($shortcut.IconLocation -split ',')[0]
+      $requiresUpdate = (
+        -not (Test-Path -LiteralPath $shortcutPath) -or
+        $shortcut.TargetPath -ne $targetPath -or
+        $shortcut.Arguments -ne $arguments -or
+        $currentIcon -ne $iconPath
+      )
+      if ($requiresUpdate) {
+        $shortcut.TargetPath = $targetPath
+        $shortcut.Arguments = $arguments
+        $shortcut.IconLocation = "$iconPath,0"
+        $shortcut.WorkingDirectory = Split-Path -Parent $targetPath
+        $shortcut.Description = '{{ mihon_shortcut_name }}'
+        $shortcut.Save()
+      }
+      $Ansible.Changed = $requiresUpdate
+
+- name: Mihon | Pin shortcut to taskbar when supported
+  ansible.windows.win_powershell:
+    script: |
+      $shortcutPath = '{{ mihon_paths.result.shortcut }}'
+      $folder = (New-Object -ComObject Shell.Application).Namespace(
+        (Split-Path -Parent $shortcutPath)
+      )
+      $item = $folder.ParseName((Split-Path -Leaf $shortcutPath))
+      $pinVerb = $item.Verbs() |
+        Where-Object { $_.Name -match 'Pin to taskbar' } |
+        Select-Object -First 1
+      if ($null -ne $pinVerb) {
+        $pinVerb.DoIt()
+        $Ansible.Changed = $true
+      } else {
+        $Ansible.Changed = $false
+      }

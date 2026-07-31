@@ -1,0 +1,17 @@
+---
+dev_chocolatey_packages:
+  - autohotkey
+  - git
+  - gh
+  - bruno
+  - nodejs
+  - powershell-core
+  - python
+  - uv
+  - sqlite
+  - 7zip
+  - fiddler
+  - proxifier
+  - everything
+  - winscp
+  - burp-suite-free-edition

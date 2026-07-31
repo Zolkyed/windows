@@ -1,0 +1,7 @@
+---
+gpg_dnf_packages:
+  - gnupg2
+
+# Key
+gpg_signing_key:
+  url: "https://github.com/zolkyed.gpg"

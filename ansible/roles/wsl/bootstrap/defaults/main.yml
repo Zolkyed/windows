@@ -1,0 +1,4 @@
+---
+wsl_bootstrap_distribution: FedoraLinux-44
+wsl_bootstrap_user: charl
+wsl_bootstrap_script_path: C:\Windows\Temp\wsl-bootstrap.sh

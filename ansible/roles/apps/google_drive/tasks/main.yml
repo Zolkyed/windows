@@ -1,0 +1,9 @@
+---
+- name: Google Drive | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Google Drive
+    install_chocolatey_packages: []
+    install_scoop_packages: []
+    install_winget_packages: "{{ google_drive_winget_packages }}"

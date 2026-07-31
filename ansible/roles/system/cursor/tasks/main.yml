@@ -1,0 +1,17 @@
+---
+- name: Cursor | Ensure destination directory exists
+  ansible.windows.win_file:
+    path: "{{ cursor_destination }}"
+    state: directory
+
+- name: Cursor | Install cursor files
+  ansible.windows.win_copy:
+    src: cursors/
+    dest: "{{ cursor_destination }}\\"
+
+- name: Cursor | Register selectable scheme
+  ansible.windows.win_regedit:
+    path: HKCU:\Control Panel\Cursors\Schemes
+    name: "{{ cursor_scheme_name }}"
+    data: "{{ cursor_destination }}\\aero_black_arrow.cur,{{ cursor_destination }}\\aero_black_helpsel.cur,{{ cursor_destination }}\\aero_black_working.ani,{{ cursor_destination }}\\aero_black_busy.ani,{{ cursor_destination }}\\aero_black_cross.cur,{{ cursor_destination }}\\aero_black_beam.cur,{{ cursor_destination }}\\aero_black_pen.cur,{{ cursor_destination }}\\aero_black_unavail.cur,{{ cursor_destination }}\\aero_black_ns.cur,{{ cursor_destination }}\\aero_black_ew.cur,{{ cursor_destination }}\\aero_black_nwse.cur,{{ cursor_destination }}\\aero_black_nesw.cur,{{ cursor_destination }}\\aero_black_move.cur,{{ cursor_destination }}\\aero_black_up.cur,{{ cursor_destination }}\\aero_black_link.cur,{{ cursor_destination }}\\aero_black_pin.cur,{{ cursor_destination }}\\aero_black_person.cur"
+    type: string

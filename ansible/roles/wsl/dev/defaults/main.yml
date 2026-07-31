@@ -1,0 +1,22 @@
+---
+dev_dnf_packages:
+  # Build tools
+  - "@development-tools"
+
+  # Version control
+  - git
+  - git-lfs
+  - gh
+
+  # Dotfiles
+  - chezmoi
+
+  # CLI
+  - ca-certificates
+  - curl
+  - jq
+  - neovim
+  - openssh-clients
+  - ripgrep
+  - unzip
+  - zip

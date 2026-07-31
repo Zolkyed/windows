@@ -1,0 +1,39 @@
+---
+- name: Downloader | Stop qBittorrent before editing its configuration
+  ansible.windows.win_powershell:
+    script: |
+      $processes = @(Get-Process -Name qbittorrent -ErrorAction SilentlyContinue)
+      if ($processes.Count -eq 0) {
+        $Ansible.Changed = $false
+        return
+      }
+
+      $processes | Stop-Process -Force
+      $Ansible.Changed = $true
+
+- name: Downloader | Initialize qBittorrent configuration
+  ansible.windows.win_copy:
+    content: |
+      [BitTorrent]
+    dest: "{{ downloader_paths.result.qbittorrentConfig }}"
+    force: false
+
+- name: Downloader | Configure qBittorrent download settings
+  community.windows.win_lineinfile:
+    path: "{{ downloader_paths.result.qbittorrentConfig }}"
+    regexp: "^{{ item.option | regex_escape }}="
+    line: "{{ item.option }}={{ item.value }}"
+    insertafter: '^\[BitTorrent\]$'
+  loop:
+    - option: 'Session\DefaultSavePath'
+      value: "{{ downloader_paths.result.qbittorrentCompleteConfig }}"
+    - option: 'Session\TempPath'
+      value: "{{ downloader_paths.result.qbittorrentIncompleteConfig }}"
+    - option: 'Session\TempPathEnabled'
+      value: "true"
+    - option: 'Session\GlobalMaxSeedingMinutes'
+      value: "{{ downloader_qbittorrent_max_seeding_minutes }}"
+    - option: 'Session\ShareLimitAction'
+      value: Remove
+  loop_control:
+    label: "{{ item.option }}"

@@ -1,0 +1,27 @@
+---
+- name: Shell | Install packages
+  ansible.builtin.dnf:
+    name: "{{ shell_dnf_packages }}"
+    state: present
+
+- name: Shell | Download Starship installer
+  ansible.builtin.get_url:
+    url: "{{ shell_starship_install_url }}"
+    dest: /tmp/starship-install.sh
+    mode: "0755"
+  when: not (shell_starship_bin is exists)
+
+- name: Shell | Install Starship prompt
+  ansible.builtin.command:
+    argv: [/tmp/starship-install.sh, --yes]
+  when: not (shell_starship_bin is exists)
+
+- name: Shell | Set user shell
+  ansible.builtin.user:
+    name: "{{ user_name }}"
+    shell: "{{ shell_user_shell }}"
+
+- name: Shell | Set root shell
+  ansible.builtin.user:
+    name: root
+    shell: "{{ shell_root_shell }}"

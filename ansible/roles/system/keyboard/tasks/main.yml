@@ -1,0 +1,30 @@
+---
+- name: Keyboard | Ensure installer directory exists
+  ansible.windows.win_file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ keyboard_layout_installer_directory }}"
+    - "{{ keyboard_layout_installer_directory }}\\amd64"
+    - "{{ keyboard_layout_installer_directory }}\\wow64"
+
+- name: Keyboard | Copy layout installer
+  ansible.windows.win_copy:
+    src: "{{ keyboard_layout_msi }}"
+    dest: "{{ keyboard_layout_installer_destination }}"
+
+- name: Keyboard | Copy layout binaries required by MSI
+  ansible.windows.win_copy:
+    src: "{{ item }}/{{ keyboard_layout_file }}"
+    dest: >-
+      {{ keyboard_layout_installer_directory }}\{{ item }}\{{ keyboard_layout_file }}
+  loop:
+    - amd64
+    - wow64
+
+- name: Keyboard | Install layout
+  ansible.windows.win_package:
+    path: "{{ keyboard_layout_installer_destination }}"
+    product_id: "{{ keyboard_layout_product_id }}"
+    arguments: /qn /norestart
+    state: present

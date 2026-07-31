@@ -1,0 +1,9 @@
+---
+- name: Dev | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Dev
+    install_chocolatey_packages: "{{ dev_chocolatey_packages }}"
+    install_scoop_packages: []
+    install_winget_packages: []

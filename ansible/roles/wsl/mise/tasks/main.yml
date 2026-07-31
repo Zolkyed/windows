@@ -1,0 +1,30 @@
+---
+- name: Mise | Download installer
+  become_user: "{{ user_name }}"
+  ansible.builtin.get_url:
+    url: "{{ mise_install_url }}"
+    dest: /tmp/mise-install.sh
+    mode: "0755"
+  when: not (mise_bin is exists)
+
+- name: Mise | Install mise
+  become_user: "{{ user_name }}"
+  ansible.builtin.command:
+    argv: [/tmp/mise-install.sh]
+  when: not (mise_bin is exists)
+
+- name: "Mise | Install tools"
+  become_user: "{{ user_name }}"
+  ansible.builtin.command:
+    argv:
+      - "{{ mise_bin }}"
+      - use
+      - --global
+      - "{{ item }}"
+  environment:
+    HOME: "{{ user_home }}"
+  loop: "{{ mise_tools }}"
+  register: mise_result
+  changed_when: >
+    'installed' in mise_result.stdout
+    or 'installed' in mise_result.stderr

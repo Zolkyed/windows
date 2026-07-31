@@ -1,0 +1,28 @@
+---
+- name: GPG | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: GPG
+    install_chocolatey_packages: "{{ gpg_chocolatey_packages }}"
+    install_scoop_packages: []
+    install_winget_packages: []
+
+- name: GPG | Resolve GnuPG home path
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Result = Join-Path $env:USERPROFILE '.gnupg'
+      $Ansible.Changed = $false
+  register: gpg_home
+  check_mode: false
+
+- name: GPG | Ensure GnuPG home directory exists
+  ansible.windows.win_file:
+    path: "{{ gpg_home.result }}"
+    state: directory
+
+- name: GPG | Configure GnuPG home
+  ansible.windows.win_environment:
+    level: user
+    name: GNUPGHOME
+    value: "{{ gpg_home.result }}"

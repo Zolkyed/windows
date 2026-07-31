@@ -1,0 +1,27 @@
+---
+- name: Configure WSL
+  hosts: all
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+    - name: WSL | Fully upgrade dnf packages
+      tags: always
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        update_cache: true
+
+  roles:
+    - role: wsl/base
+      tags: base
+    - role: wsl/dev
+      tags: dev
+    - role: wsl/gpg
+      tags: gpg
+    - role: wsl/shell
+      tags: shell
+    - role: wsl/mise
+      tags: mise
+    - role: wsl/dotfiles
+      tags: dotfiles

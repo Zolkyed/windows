@@ -1,0 +1,41 @@
+---
+- name: Media | Install packages
+  ansible.builtin.include_role:
+    name: lib/packages
+  vars:
+    install_label: Media
+    install_chocolatey_packages: "{{ media_chocolatey_packages }}"
+    install_scoop_packages: []
+    install_winget_packages: []
+
+- name: Media | Install AniList updater Python dependencies
+  ansible.windows.win_powershell:
+    parameters:
+      Packages: "{{ media_python_packages }}"
+    script: |
+      param([string[]]$Packages)
+
+      $python = Get-Command python.exe -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+      if ($null -eq $python) {
+        throw 'Python is required by the mpv AniList updater but was not found.'
+      }
+
+      $missing = @()
+      foreach ($package in $Packages) {
+        & $python.Source -m pip show $package *> $null
+        if ($LASTEXITCODE -ne 0) {
+          $missing += $package
+        }
+      }
+
+      if ($missing.Count -eq 0) {
+        $Ansible.Changed = $false
+        return
+      }
+
+      & $python.Source -m pip install @missing
+      if ($LASTEXITCODE -ne 0) {
+        throw "pip failed to install: $($missing -join ', ')"
+      }
+      $Ansible.Changed = $true

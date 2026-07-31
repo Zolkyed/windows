@@ -1,0 +1,9 @@
+---
+media_chocolatey_packages:
+  - spotify
+  - mpv
+  - obs-studio
+
+media_python_packages:
+  - guessit
+  - requests

@@ -1,0 +1,20 @@
+---
+- name: Bin | Resolve Startup directory path
+  ansible.windows.win_powershell:
+    script: |
+      $Ansible.Result = @{
+        startupDirectory = Join-Path $env:APPDATA '{{ bin_windows_startup_dir }}'
+      }
+      $Ansible.Changed = $false
+  register: bin_paths
+  check_mode: false
+
+- name: Bin | Ensure Startup directory exists
+  ansible.windows.win_file:
+    path: "{{ bin_paths.result.startupDirectory }}"
+    state: directory
+
+- name: Bin | Synchronize AHK files to Startup
+  ansible.windows.win_copy:
+    src: "{{ bin_source_dir }}"
+    dest: "{{ bin_paths.result.startupDirectory }}\\"

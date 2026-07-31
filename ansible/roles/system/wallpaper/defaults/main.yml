@@ -1,0 +1,9 @@
+---
+# File bundled in this role's files directory.
+wallpaper_source: wallpaper.jpg
+
+# Path on the Windows host.
+wallpaper_destination: '%LOCALAPPDATA%\Ansible\wallpaper.jpg'
+
+# Windows wallpaper style: 0=center, 2=stretch, 6=fit, 10=fill.
+wallpaper_style: "10"

@@ -1,0 +1,8 @@
+---
+install_label: Windows
+packages_retries: 3
+packages_retry_delay: 10
+
+install_chocolatey_packages: []
+install_scoop_packages: []
+install_winget_packages: []

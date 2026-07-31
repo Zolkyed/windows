@@ -1,0 +1,12 @@
+---
+- name: "Packages | Load Chocolatey tasks for {{ install_label }}"
+  ansible.builtin.include_tasks: chocolatey.yml
+  when: install_chocolatey_packages | default([]) | length > 0
+
+- name: "Packages | Load Scoop tasks for {{ install_label }}"
+  ansible.builtin.include_tasks: scoop.yml
+  when: install_scoop_packages | default([]) | length > 0
+
+- name: "Packages | Load WinGet tasks for {{ install_label }}"
+  ansible.builtin.include_tasks: winget.yml
+  when: install_winget_packages | default([]) | length > 0

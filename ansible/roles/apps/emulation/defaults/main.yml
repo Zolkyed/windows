@@ -1,0 +1,5 @@
+---
+emulation_chocolatey_packages:
+  - pcsx2
+  - azahar
+  - dolphin
