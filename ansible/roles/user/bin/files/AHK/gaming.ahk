@@ -16,14 +16,3 @@ $c::
     else
         Send "{c up}"
 }
-
-~$RButton::
-{
-    While GetKeyState("RButton", "P")
-    {
-        Click("right")
-        Sleep(150)
-    }
-}
-
-#HotIf
