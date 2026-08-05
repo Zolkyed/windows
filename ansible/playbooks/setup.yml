@@ -73,8 +73,6 @@
       tags: ssh
     - role: user/gpg
       tags: gpg
-    - role: user/shell
-      tags: shell
     - role: user/bin
       tags: bin
     - role: user/dotfiles

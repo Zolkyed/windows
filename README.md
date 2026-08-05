@@ -63,7 +63,6 @@ The user roles follow the same structure as the Linux repository.
 | --- | --- |
 | `user/ssh` | SSH directory and GitHub authorized keys |
 | `user/gpg` | Gpg4win and `GNUPGHOME` |
-| `user/shell` | PowerShell profile and oh-my-posh |
 | `user/bin` | AutoHotkey scripts and supporting files in the user Startup folder |
 | `user/dotfiles` | Chezmoi-managed Git, SSH, GPG, VS Code, mpv, and shell files |
 

@@ -1,5 +1,0 @@
----
-shell_chocolatey_packages:
-  - oh-my-posh
-
-shell_oh_my_posh_theme: pure
