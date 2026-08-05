@@ -3,10 +3,7 @@ shell_user_shell: /usr/bin/zsh
 shell_root_shell: /bin/bash
 
 shell_dnf_packages:
-  - atuin
   - bash-completion
-  - fzf
-  - zoxide
   - zsh
   - zsh-autosuggestions
   - zsh-syntax-highlighting
