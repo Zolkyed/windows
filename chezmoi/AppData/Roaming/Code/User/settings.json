@@ -297,9 +297,11 @@
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
   "typescript.inlayHints.enumMemberValues.enabled": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.tsserver.maxTsServerMemory": 4096,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
   },
+  "npm.enableScriptExplorer": true,
 
   // [python]
   "python.analysis.inlayHints.callArgumentNames": "partial",
