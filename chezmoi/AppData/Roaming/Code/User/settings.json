@@ -101,9 +101,9 @@
     // "editorOverviewRuler.addedForeground": "#0000",
     // "editorOverviewRuler.modifiedForeground": "#0000",
     // "editorOverviewRuler.deletedForeground": "#0000",
+    // "editorOverviewRuler.warningForeground": "#0000",
+    // "editorOverviewRuler.errorForeground": "#0000",
     "editorOverviewRuler.infoForeground": "#0000",
-    "editorOverviewRuler.warningForeground": "#0000",
-    "editorOverviewRuler.errorForeground": "#0000",
     "editorOverviewRuler.bracketMatchForeground": "#0000",
     "editorOverviewRuler.commentForeground": "#0000",
     "editorOverviewRuler.commentUnresolvedForeground": "#0000",
@@ -119,9 +119,9 @@
   },
   "editor.hideCursorInOverviewRuler": true,
   "debug.showBreakpointsInOverviewRuler": true,
-  "editor.minimap.enabled": false,
+  "editor.minimap.enabled": true,
   "editor.scrollbar.verticalScrollbarSize": 13,
-  "editor.scrollbar.vertical": "visible",
+  "editor.scrollbar.vertical": "hidden",
   "editor.scrollbar.horizontalScrollbarSize": 0,
   "editor.scrollbar.horizontal": "hidden",
 
@@ -135,7 +135,9 @@
 
   // color Brackets
   "editor.guides.bracketPairs": "active",
-  "editor.guides.bracketPairsHorizontal": false, // (____)
+  "editor.guides.bracketPairsHorizontal": true, // (____)
+  "editor.guides.highlightActiveBracketPair": true,
+  "editor.guides.highlightActiveIndentation": "always",
 
   // cursor
   "editor.cursorStyle": "line",
@@ -144,14 +146,23 @@
   "terminal.integrated.cursorBlinking": false,
   "terminal.integrated.cursorStyleInactive": "none",
   "terminal.integrated.cursorWidth": 2,
+  "editor.cursorWidth": 2,
 
   // Editor
-  "editor.fontFamily": "FiraCode Nerd Font",
+  "editor.fontFamily": "Fira Code",
 
   // terminal
   "terminal.integrated.fontFamily": "FiraCode Nerd Font",
   "terminal.integrated.defaultProfile.windows": "Git Bash",
   "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.profiles.windows": {
+    "Git Bash": {
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe"
+    }
+  },
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.scrollback": 10000,
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.tabs.hideCondition": "never",
   "terminal.integrated.tabs.location": "right",
@@ -159,6 +170,7 @@
 
   // debug
   "debug.toolBarLocation": "docked",
+  "debug.inlineValues": "on",
 
   // render
   "editor.renderLineHighlight": "all",
@@ -171,13 +183,15 @@
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "workbench.editor.openOnFocus": false,
   "workbench.activityBar.location": "default",
+  "workbench.tips.enabled": false,
 
   // file tree
-  "workbench.tree.renderIndentGuides": "onHover",
+  "workbench.tree.renderIndentGuides": "always",
 
   // breadcrumbs
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "last",
+  "breadcrumbs.symbolPath": "on",
   "editor.acceptSuggestionOnCommitCharacter": false,
 
   // explorer
@@ -214,10 +228,12 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -244,6 +260,16 @@
     "editor.tabSize": 2,
     "prettier.tabWidth": 2,
   },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "prettier.tabWidth": 2,
+  },
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
@@ -251,21 +277,34 @@
   },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt",
+    "editor.tabSize": 2,
+    "shfmt.indent": 2,
   },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
   },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+  },
 
   // [javascript] & [typescript]
-  "js/ts.inlayHints.enumMemberValues.enabled": true,
-  "js/ts.inlayHints.parameterNames.enabled": "literals",
-  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
-  "js/ts.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
-  "js/ts.autoClosingTags.enabled": true,
+  "javascript.inlayHints.parameterNames.enabled": "literals",
+  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.inlayHints.enumMemberValues.enabled": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.inlayHints.parameterNames.enabled": "literals",
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+  },
 
   // [python]
   "python.analysis.inlayHints.callArgumentNames": "partial",
   "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.variableTypes": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.terminal.executeInFileDir": true,
   "jupyter.notebookFileRoot": "${workspaceFolder}/notebooks",
@@ -273,7 +312,6 @@
   // [html]
   "editor.linkedEditing": true,
   "emmet.includeLanguages": {
-    "html": "html",
     "javascript": "javascriptreact",
   },
 
@@ -299,6 +337,9 @@
     "**/logs/**": true,
     "**/.fdk/**": true,
     "**/__pycache__/**": true,
+    "**/.terraform/**": true,
+    "**/.venv/**": true,
+    "**/.ruff_cache/**": true,
   },
   "files.exclude": {
     "**/.git/objects/**": true,
@@ -314,8 +355,12 @@
     "**/bower_components": true,
     "**/dist/**": true,
     "**/log/**": true,
+    "**/logs/**": true,
     "**/.fdk/**": true,
     "**/__pycache__/**": true,
+    "**/.terraform/**": true,
+    "**/.venv/**": true,
+    "**/.ruff_cache/**": true,
   },
   "search.exclude": {
     "**/.git/objects/**": true,
@@ -331,7 +376,12 @@
     "**/bower_components": true,
     "**/dist/**": true,
     "**/log/**": true,
+    "**/logs/**": true,
+    "**/.fdk/**": true,
     "**/__pycache__/**": true,
+    "**/.terraform/**": true,
+    "**/.venv/**": true,
+    "**/.ruff_cache/**": true,
   },
 
   // git
@@ -339,6 +389,7 @@
   "git.suggestSmartCommit": false,
   "git.confirmSync": false,
   "git.autofetch": true,
+  "git.pruneOnFetch": true,
   "git.showActionButton": {
     "commit": true,
     "publish": true,
@@ -374,5 +425,6 @@
   "editor.stickyScroll.enabled": false,
   "terminal.integrated.stickyScroll.enabled": false,
   "extensions.autoUpdate": "onlyEnabledExtensions",
-  "workbench.colorTheme": "Catppuccin Mocha",
+  "gitlens.codeLens.enabled": false,
+  "gitlens.currentLine.enabled": false,
 }
