@@ -119,11 +119,11 @@
   },
   "editor.hideCursorInOverviewRuler": true,
   "debug.showBreakpointsInOverviewRuler": true,
-  "editor.minimap.enabled": true,
+  "editor.minimap.enabled": false,
   "editor.scrollbar.verticalScrollbarSize": 13,
-  "editor.scrollbar.vertical": "hidden",
-  "editor.scrollbar.horizontalScrollbarSize": 0,
-  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "auto",
+  "editor.scrollbar.horizontalScrollbarSize": 10,
+  "editor.scrollbar.horizontal": "auto",
 
   // zoom
   "window.zoomLevel": 0.3,
@@ -407,26 +407,8 @@
     "markdown": false,
   },
   "editor.quickSuggestionsDelay": 0,
-  "workbench.editor.closeEmptyGroups": false,
-  "terminal.integrated.commandsToSkipShell": [
-    "workbench.action.toggleSidebarVisibility",
-    "workbench.action.ZoomIn",
-    "workbench.action.ZoomOut",
-    "workbench.action.focusLeftGroup",
-    "workbench.action.focusRightGroup",
-    "workbench.action.openEditorAtIndex1",
-    "workbench.action.openEditorAtIndex2",
-    "workbench.action.openEditorAtIndex3",
-    "workbench.action.openEditorAtIndex4",
-    "workbench.action.openEditorAtIndex5",
-    "workbench.action.openEditorAtIndex6",
-    "workbench.action.terminal.rename",
-  ],
 
   // misc
   "editor.stickyScroll.enabled": false,
   "terminal.integrated.stickyScroll.enabled": false,
-  "extensions.autoUpdate": "onlyEnabledExtensions",
-  "gitlens.codeLens.enabled": false,
-  "gitlens.currentLine.enabled": false,
 }

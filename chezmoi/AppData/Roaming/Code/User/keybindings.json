@@ -18,11 +18,6 @@
   },
   {
     "key": "ctrl+w",
-    "command": "workbench.action.closeGroup",
-    "when": "activeEditorGroupEmpty && !terminalFocus",
-  },
-  {
-    "key": "ctrl+w",
     "command": "workbench.action.terminal.kill",
     "when": "terminalFocus",
   },
@@ -30,6 +25,11 @@
     "key": "ctrl+w",
     "command": "-workbench.action.closeWindow",
     "when": "!editorFocus && !terminalFocus",
+  },
+  {
+    "key": "alt+w",
+    "command": "workbench.action.closeGroup",
+    "when": "!terminalFocus",
   },
   // Switch tabs (Chrome: Ctrl+Tab / Ctrl+Shift+Tab)
   {
@@ -107,10 +107,17 @@
     "key": "ctrl+h",
     "command": "workbench.action.openRecent",
   },
-  // Terminal toggle (similar to Chrome DevTools Ctrl+Shift+I)
+  // Terminal fullscreen toggle — one press: show/focus terminal + toggle maximize
   {
     "key": "ctrl+alt+t",
-    "command": "workbench.action.terminal.toggleTerminal",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.terminal.focus",
+        "workbench.action.toggleMaximizedPanel",
+      ],
+    },
+    "when": "!terminalEditorFocus",
   },
   {
     "key": "ctrl+up",
@@ -152,62 +159,11 @@
     "command": "workbench.action.terminal.split",
     "when": "terminalFocus",
   },
-  // Languages (Python, Node, Ts, Java, C, C++)
+  // Languages (Python, Node, Ts, Java, C, C++) — via Code Runner
   {
     "key": "ctrl+enter",
-    "command": "workbench.action.terminal.sendSequence",
-    "when": "resourceLangId == 'python'",
-    "args": {
-      "text": "cd \"${fileDirname}\" && python \"${file}\"\u000D",
-    },
-  },
-  {
-    "key": "ctrl+enter",
-    "command": "workbench.action.terminal.sendSequence",
-    "when": "resourceLangId == 'javascript'",
-    "args": {
-      "text": "cd \"${fileDirname}\" && node \"${file}\"\u000D",
-    },
-  },
-  {
-    "key": "ctrl+enter",
-    "command": "workbench.action.terminal.sendSequence",
-    "when": "resourceLangId == 'typescript'",
-    "args": {
-      "text": "cd \"${fileDirname}\" && ts-node \"${file}\"\u000D",
-    },
-  },
-  {
-    "key": "ctrl+enter",
-    "command": "workbench.action.terminal.sendSequence",
-    "when": "resourceLangId == 'java'",
-    "args": {
-      "text": "cd \"${fileDirname}\" && java \"${file}\"\u000D",
-    },
-  },
-  {
-    "key": "ctrl+enter",
-    "command": "workbench.action.terminal.sendSequence",
-    "when": "resourceLangId == 'c'",
-    "args": {
-      "text": "cd \"${fileDirname}\" && gcc \"${file}\" -o \"${fileBasenameNoExtension}\" && \"./${fileBasenameNoExtension}\"\u000D",
-    },
-  },
-  {
-    "key": "ctrl+enter",
-    "command": "workbench.action.terminal.sendSequence",
-    "when": "resourceLangId == 'cpp'",
-    "args": {
-      "text": "cd \"${fileDirname}\" && g++ \"${file}\" -o \"${fileBasenameNoExtension}\" && \"./${fileBasenameNoExtension}\"\u000D",
-    },
-  },
-  {
-    "key": "ctrl+enter",
-    "command": "workbench.action.terminal.sendSequence",
-    "when": "resourceLangId == 'shellscript'",
-    "args": {
-      "text": "cd \"${fileDirname}\" && bash \"${file}\"\u000D",
-    },
+    "command": "code-runner.run",
+    "when": "editorTextFocus",
   },
   // Debug
   {
@@ -225,6 +181,10 @@
     "key": "ctrl+shift+n",
     "command": "explorer.newFolder",
     "when": "!editorFocus",
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "-workbench.action.newWindow",
   },
   {
     "key": "ctrl+shift+r",
