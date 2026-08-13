@@ -185,6 +185,9 @@
   "workbench.editor.openOnFocus": false,
   "workbench.activityBar.location": "default",
   "workbench.tips.enabled": false,
+  "window.commandCenter": false,
+  "window.title": " ",
+  "chat.commandCenter.enabled": false,
 
   // file tree
   "workbench.tree.renderIndentGuides": "always",
