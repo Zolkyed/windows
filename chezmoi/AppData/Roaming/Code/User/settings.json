@@ -152,6 +152,7 @@
   "editor.fontFamily": "Fira Code",
 
   // terminal
+  "workbench.panel.defaultLocation": "right",
   "terminal.integrated.fontFamily": "FiraCode Nerd Font",
   "terminal.integrated.defaultProfile.windows": "Git Bash",
   "terminal.integrated.defaultProfile.linux": "zsh",
