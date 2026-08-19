@@ -34,19 +34,19 @@
   // Switch tabs (Chrome: Ctrl+Tab / Ctrl+Shift+Tab)
   {
     "key": "ctrl+right",
-    "command": "workbench.action.nextEditor",
+    "command": "workbench.action.nextEditorInGroup",
   },
   {
     "key": "ctrl+left",
-    "command": "workbench.action.previousEditor",
+    "command": "workbench.action.previousEditorInGroup",
   },
   {
-    "key": "alt+left",
-    "command": "workbench.action.focusLeftGroup",
+  "key": "alt+left",
+  "command": "workbench.action.navigateLeft",
   },
   {
-    "key": "alt+right",
-    "command": "workbench.action.focusRightGroup",
+  "key": "alt+right",
+  "command": "workbench.action.navigateRight",
   },
   // Jump to specific tab (Chrome: Ctrl+1..8)
   {

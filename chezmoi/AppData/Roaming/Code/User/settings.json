@@ -89,6 +89,7 @@
       ],
     },
   },
+
   // background
   "workbench.colorCustomizations": {
     "[Default Dark Modern]": {
@@ -126,14 +127,14 @@
   "editor.scrollbar.horizontal": "auto",
 
   // zoom
-  "window.zoomLevel": 0.3,
+  "window.zoomLevel": 0.5,
   "editor.mouseWheelZoom": false,
   "editor.smoothScrolling": false,
 
   // icons
   "workbench.iconTheme": "material-icon-theme",
 
-  // color Brackets
+  // color brackets
   "editor.guides.bracketPairs": "active",
   "editor.guides.bracketPairsHorizontal": true, // (____)
   "editor.guides.highlightActiveBracketPair": true,
@@ -142,14 +143,18 @@
   // cursor
   "editor.cursorStyle": "line",
   "editor.cursorBlinking": "solid",
+  "editor.cursorWidth": 2,
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.cursorBlinking": false,
   "terminal.integrated.cursorStyleInactive": "none",
   "terminal.integrated.cursorWidth": 2,
-  "editor.cursorWidth": 2,
 
-  // Editor
+  // editor
   "editor.fontFamily": "Fira Code",
+  "editor.renderLineHighlight": "all",
+  "editor.renderWhitespace": "none",
+  "editor.linkedEditing": true,
+  "editor.stickyScroll.enabled": false,
 
   // terminal
   "workbench.panel.defaultLocation": "right",
@@ -167,17 +172,14 @@
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.tabs.hideCondition": "never",
   "terminal.integrated.tabs.location": "right",
-  "terminal.integrated.tabs.title": "${sequence}",
+  "terminal.integrated.tabs.title": "${process}",
+  "terminal.integrated.stickyScroll.enabled": false,
 
   // debug
   "debug.toolBarLocation": "docked",
   "debug.inlineValues": "on",
 
-  // render
-  "editor.renderLineHighlight": "all",
-  "editor.renderWhitespace": "none",
-
-  // Workspace
+  // workspace
   "workbench.layoutControl.enabled": false,
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "none",
@@ -196,7 +198,10 @@
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "last",
   "breadcrumbs.symbolPath": "on",
+
+  // suggestions
   "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.quickSuggestionsDelay": 0,
 
   // explorer
   "explorer.confirmDelete": false,
@@ -292,7 +297,7 @@
     "editor.formatOnSave": true,
   },
 
-  // [javascript] & [typescript]
+  // javascript / typescript
   "javascript.inlayHints.parameterNames.enabled": "literals",
   "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
   "javascript.inlayHints.enumMemberValues.enabled": true,
@@ -302,12 +307,8 @@
   "typescript.inlayHints.enumMemberValues.enabled": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.tsserver.maxTsServerMemory": 4096,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-  },
-  "npm.enableScriptExplorer": true,
 
-  // [python]
+  // python
   "python.analysis.inlayHints.callArgumentNames": "partial",
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.inlayHints.variableTypes": true,
@@ -315,13 +316,12 @@
   "python.terminal.executeInFileDir": true,
   "jupyter.notebookFileRoot": "${workspaceFolder}/notebooks",
 
-  // [html]
-  "editor.linkedEditing": true,
+  // html
   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
   },
 
-  // [md]
+  // markdown
   "markdown.preview.scrollEditorWithPreview": true,
   "markdown.preview.scrollPreviewWithEditor": true,
 
@@ -404,15 +404,15 @@
   "git.mergeEditor": true,
   "diffEditor.codeLens": true,
 
-  // gitHub copilot + CLI
+  // files
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
+  "files.saveConflictResolution": "askUser",
+
+  // github copilot
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": false,
   },
-  "editor.quickSuggestionsDelay": 0,
-
-  // misc
-  "editor.stickyScroll.enabled": false,
-  "terminal.integrated.stickyScroll.enabled": false,
 }
