@@ -127,7 +127,7 @@
   "editor.scrollbar.horizontal": "auto",
 
   // zoom
-  "window.zoomLevel": 0.5,
+  "window.zoomLevel": -1,
   "editor.mouseWheelZoom": false,
   "editor.smoothScrolling": false,
 
@@ -415,4 +415,37 @@
     "plaintext": false,
     "markdown": false,
   },
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Use Conventional Commits: <type>[optional scope][!]: <description>."
+    },
+    {
+      "text": "Use only: feat, fix, docs, perf, refactor, test, chore, ci, or build."
+    },
+    {
+      "text": "Write a concise lowercase imperative description without a trailing period."
+    },
+    {
+      "text": "Describe the purpose of the complete staged change, not individual files."
+    },
+  ],
+  "github.copilot.chat.pullRequestDescriptionGeneration.instructions": [
+    {
+      "text": "Use a concise lowercase Conventional Commit title: <type>[optional scope][!]: <description>."
+    },
+    {
+      "text": "Use only: feat, fix, docs, perf, refactor, test, chore, ci, or build."
+    },
+    {
+      "text": "Structure the description with Summary, Closes #<issue>, Changes, Verification, and Risks sections."
+    },
+    {
+      "text": "Explain what changed, why it changed, validation performed, and any risks."
+    },
+  ],
+  "github.copilot.chat.reviewSelection.instructions": [
+    {
+      "text": "Prioritize correctness, security, regressions, edge cases, missing tests, convention violations, and unnecessary changes."
+    },
+  ],
 }
