@@ -55,16 +55,10 @@
       tags: vpn
     - role: apps/downloader
       tags: downloader
-    - role: apps/google_drive
-      tags: google_drive
-    - role: apps/emulation
-      tags: emulation
     - role: apps/media
       tags: media
     - role: apps/gaming
       tags: gaming
-    - role: apps/communication
-      tags: communication
     - role: apps/vscode
       tags: vscode
 
@@ -77,7 +71,3 @@
       tags: bin
     - role: user/dotfiles
       tags: dotfiles
-
-    # wsl bootstrap
-    - role: wsl/bootstrap
-      tags: wsl_bootstrap

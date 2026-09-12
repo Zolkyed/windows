@@ -1,4 +1,7 @@
 ---
+# Classic sudo supports Ansible's custom password prompt on Ubuntu.
+ansible_become_exe: /usr/bin/sudo.ws
+
 # User
-user_name: "charl"
+user_name: "zolkyed"
 user_home: "/home/{{ user_name }}"

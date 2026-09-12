@@ -1,13 +1,4 @@
 ---
-- name: VSCode | Install packages
-  ansible.builtin.include_role:
-    name: lib/packages
-  vars:
-    install_label: VSCode
-    install_chocolatey_packages: "{{ vscode_chocolatey_packages }}"
-    install_scoop_packages: []
-    install_winget_packages: []
-
 - name: VSCode | Find CLI
   ansible.windows.win_powershell:
     script: |

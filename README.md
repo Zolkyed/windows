@@ -36,7 +36,7 @@ manage the same concern.
 | `system/taskbar` | Search, Task View, and widgets |
 | `system/execution_policy` | PowerShell profile execution |
 | `system/fonts` | Fira Code, JetBrains Mono, Meslo, and Nerd Fonts symbols |
-| `system/wsl` | WSL optional features and the Fedora Linux distribution |
+| `system/wsl` | WSL optional features and the Ubuntu distribution |
 
 ---
 
@@ -46,12 +46,10 @@ manage the same concern.
 | --- | --- |
 | `apps/browser` | Brave and managed browser policies |
 | `apps/downloader` | gallery-dl, HexChat, JDownloader, qBittorrent, and yt-dlp |
-| `apps/google_drive` | Google Drive for desktop |
-| `apps/emulation` | Azahar, Dolphin, and PCSX2 |
 | `apps/media` | mpv, OBS Studio, and Spotify |
 | `apps/dev` | Burp Suite, Fiddler, Git tooling, Node.js, PowerShell, Python, uv, and 7-Zip |
 | `apps/ai` | Codex and Claude Code |
-| `apps/vscode` | Visual Studio Code and extensions |
+| `apps/vscode` | Extensions for an existing Visual Studio Code installation |
 
 ---
 
@@ -70,37 +68,26 @@ The user roles follow the same structure as the Linux repository.
 
 ## 🐧 WSL
 
-`setup.yml` installs WSL and the Fedora Linux distribution
-(`system/wsl`), then finishes by launching `wsl/bootstrap`, which creates the
-WSL user, installs Ansible inside WSL, and runs `wsl.yml` locally against
-itself — the same self-hosting pattern used by the
-[Linux configuration](https://github.com/Zolkyed/linux)'s
-`scripts/bootstrap-ansible.sh` and `inventory/local.ini`.
+`setup.yml` installs WSL and the Ubuntu distribution through `system/wsl`.
+Run `wsl.yml` separately inside your existing WSL environment with Ansible
+installed and sudo access configured.
 
-WSL uses Fedora, not Ubuntu, specifically because `dnf` packages the whole
-modern CLI toolchain (`starship`, `zoxide`, `atuin`, `fzf`, `chezmoi`, `gh`,
-`mise`'s dependencies) directly — no third-party apt repos or binary-rename
-workarounds needed. Dotfiles are shared with the
-[Linux configuration](https://github.com/Zolkyed/linux)'s chezmoi source
-(cloned fresh, same as on native Arch machines), kept portable between the
-two distros via a small path-detection helper in `plugins.zsh`.
+WSL targets the `Ubuntu` distribution and the `zolkyed` user, matching the
+current Ubuntu 26.04.1 LTS environment. Packages use APT; mise uses its
+official installer.
 
 | Role | Configuration |
 | --- | --- |
-| `wsl/bootstrap` | Creates the WSL user, installs Ansible, and runs `wsl.yml` |
-| `wsl/base` | `wsl.conf` and passwordless sudo |
-| `wsl/packages` | Base dnf packages (build tools, chezmoi, curl, jq, neovim, ripgrep, openssh-clients) |
-| `wsl/git` | Git, git-lfs, and the GitHub CLI |
 | `wsl/gpg` | GnuPG and the signing key |
-| `wsl/shell` | zsh, fzf, zoxide, atuin, and Starship (Starship via its official installer; nothing else has a Fedora package) |
-| `wsl/mise` | mise-managed Node.js, Rust, and Go |
-| `wsl/dotfiles` | Chezmoi-managed dotfiles, shared with the Linux repository |
+| `wsl/shell` | zsh, completions, and syntax highlighting |
+| `wsl/mise` | mise-managed Node.js |
+| `wsl/dotfiles` | Chezmoi-managed Git, SSH, GPG, and shared dotfiles |
 
-Re-run `wsl.yml` from inside WSL once bootstrapped:
+Run selected roles from inside WSL:
 
 ```shell
 cd ansible
-ansible-playbook -i inventory/wsl.ini playbooks/wsl.yml --tags dotfiles
+ansible-playbook -i inventory/wsl.ini playbooks/wsl.yml --tags shell,mise,dotfiles
 ```
 
 ---

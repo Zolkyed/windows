@@ -1,7 +1,4 @@
 ---
-browser_chocolatey_packages:
-  - brave
-
 brave_policy_dword:
   BraveRewardsDisabled: 1
   BraveWalletDisabled: 1

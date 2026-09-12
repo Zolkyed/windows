@@ -1,13 +1,4 @@
 ---
-- name: Browser | Install packages
-  ansible.builtin.include_role:
-    name: lib/packages
-  vars:
-    install_label: Browser
-    install_chocolatey_packages: "{{ browser_chocolatey_packages }}"
-    install_scoop_packages: []
-    install_winget_packages: []
-
 - name: Browser | Configure Brave DWORD policies
   ansible.windows.win_regedit:
     path: HKLM:\SOFTWARE\Policies\BraveSoftware\Brave

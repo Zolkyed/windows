@@ -1,6 +1,6 @@
 ---
-gpg_dnf_packages:
-  - gnupg2
+gpg_apt_packages:
+  - gnupg
 
 # Key
 gpg_signing_key:

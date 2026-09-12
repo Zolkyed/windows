@@ -1,7 +1,4 @@
 ---
-vscode_chocolatey_packages:
-  - vscode
-
 vscode_retries: 3
 vscode_retry_delay: 5
 

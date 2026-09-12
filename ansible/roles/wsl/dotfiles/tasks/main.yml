@@ -1,47 +1,76 @@
 ---
-- name: Dotfiles | Manage as user
+- name: Dotfiles | Ensure chezmoi directories exist
   become: true
   become_user: "{{ user_name }}"
-  block:
-    - name: Dotfiles | Clone repository
-      ansible.builtin.git:
-        repo: "{{ dotfiles_repo }}"
-        dest: "{{ dotfiles_repo_dir }}"
-        version: "{{ dotfiles_repo_branch }}"
-        update: true
+  ansible.builtin.file:
+    path: "{{ user_home }}/.local/bin"
+    state: directory
+    mode: "0700"
 
-    - name: Dotfiles | Initialize chezmoi
-      ansible.builtin.command:
-        argv:
-          - "{{ dotfiles_chezmoi_bin }}"
-          - init
-          - --source
-          - "{{ dotfiles_chezmoi_source_dir }}"
-          - --no-tty
-          - --force
-      changed_when: false
+- name: Dotfiles | Check chezmoi installation
+  ansible.builtin.stat:
+    path: "{{ dotfiles_chezmoi_bin }}"
+  register: dotfiles_chezmoi_installed
 
-    - name: Dotfiles | Check managed state
-      ansible.builtin.command:
-        argv:
-          - "{{ dotfiles_chezmoi_bin }}"
-          - status
-          - --source
-          - "{{ dotfiles_chezmoi_source_dir }}"
-          - --exclude
-          - scripts
-      register: dotfiles_chezmoi_status
-      changed_when: false
+- name: Dotfiles | Download chezmoi installer
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.get_url:
+    url: "{{ dotfiles_chezmoi_install_url }}"
+    dest: "/tmp/chezmoi-install.sh"
+    mode: "0700"
+  when: not dotfiles_chezmoi_installed.stat.exists
 
-    - name: Dotfiles | Apply managed state
-      ansible.builtin.command:
-        argv:
-          - "{{ dotfiles_chezmoi_bin }}"
-          - apply
-          - --source
-          - "{{ dotfiles_chezmoi_source_dir }}"
-          - --no-tty
-          - --force
-          - --exclude
-          - scripts
-      changed_when: dotfiles_chezmoi_status.stdout | length > 0
+- name: Dotfiles | Install chezmoi
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.command:
+    argv:
+      - /tmp/chezmoi-install.sh
+      - -b
+      - "{{ user_home }}/.local/bin"
+  args:
+    creates: "{{ dotfiles_chezmoi_bin }}"
+  when: not dotfiles_chezmoi_installed.stat.exists
+
+- name: Dotfiles | Initialize chezmoi
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.command:
+    argv:
+      - "{{ dotfiles_chezmoi_bin }}"
+      - init
+      - --source
+      - "{{ dotfiles_chezmoi_source_dir }}"
+      - --no-tty
+      - --force
+  changed_when: false
+
+- name: Dotfiles | Check managed state
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.command:
+    argv:
+      - "{{ dotfiles_chezmoi_bin }}"
+      - status
+      - --source
+      - "{{ dotfiles_chezmoi_source_dir }}"
+      - --exclude
+      - scripts
+  register: dotfiles_chezmoi_status
+  changed_when: false
+
+- name: Dotfiles | Apply managed state
+  become: true
+  become_user: "{{ user_name }}"
+  ansible.builtin.command:
+    argv:
+      - "{{ dotfiles_chezmoi_bin }}"
+      - apply
+      - --source
+      - "{{ dotfiles_chezmoi_source_dir }}"
+      - --no-tty
+      - --force
+      - --exclude
+      - scripts
+  when: dotfiles_chezmoi_status.stdout | length > 0

@@ -5,18 +5,13 @@
   gather_facts: true
 
   pre_tasks:
-    - name: WSL | Fully upgrade dnf packages
+    - name: WSL | Fully upgrade APT packages
       tags: always
-      ansible.builtin.dnf:  # noqa package-latest
-        name: "*"
-        state: latest
+      ansible.builtin.apt:
+        upgrade: dist
         update_cache: true
 
   roles:
-    - role: wsl/base
-      tags: base
-    - role: wsl/dev
-      tags: dev
     - role: wsl/gpg
       tags: gpg
     - role: wsl/shell
