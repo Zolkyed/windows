@@ -1,0 +1,34 @@
+[ui]
+agent_panel_sort = "spaces"
+prompt_new_tab_name = false
+status_indicators = "dots"
+copy_on_select = false
+
+[ui.sidebar.agents]
+row_gap = 1
+rows = [
+  ["state_icon", "workspace"],
+  ["tab"],
+]
+
+[ui.sidebar.spaces]
+row_gap = 1
+rows = [
+  ["state_icon", "workspace"],
+  ["branch"],
+]
+
+[ui.sound]
+enabled = true
+
+[keys]
+prefix = "§"
+new_tab = ["prefix+c", "ctrl+t"]
+close_tab = ["prefix+shift+x", "ctrl+w"]
+goto = ["prefix+g", "ctrl+k"]
+previous_tab = ["prefix+p", "ctrl+left"]
+next_tab = ["prefix+n", "ctrl+right"]
+previous_workspace = "ctrl+up"
+next_workspace = "ctrl+down"
+cycle_pane_next = ["prefix+tab", "alt+up"]
+cycle_pane_previous = ["prefix+shift+tab", "alt+down"]
