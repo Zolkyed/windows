@@ -88,6 +88,50 @@
         },
       ],
     },
+    "[OLED]": {
+      "textMateRules": [
+        {
+          "scope": ["meta.embedded", "source.groovy.embedded"],
+          "settings": {
+            "foreground": "#D4D4D4",
+          },
+        },
+        {
+          "scope": [
+            "entity.name.type.class",
+            "entity.other.inherited-class",
+            "support.class",
+          ],
+          "settings": {
+            "foreground": "#4EC9B0",
+          },
+        },
+        {
+          "scope": ["storage.type", "keyword.operator.new", "keyword.control"],
+          "settings": {
+            "foreground": "#ff7b72",
+          },
+        },
+        {
+          "scope": "entity.name.function",
+          "settings": {
+            "foreground": "#d2a8ff",
+          },
+        },
+        {
+          "scope": "support.variable.property",
+          "settings": {
+            "foreground": "#4FC1FF",
+          },
+        },
+        {
+          "scope": ["support.variable", "support.function"],
+          "settings": {
+            "foreground": "#ffa657",
+          },
+        },
+      ],
+    },
   },
 
   // background
@@ -298,15 +342,11 @@
   },
 
   // javascript / typescript
-  "javascript.inlayHints.parameterNames.enabled": "literals",
-  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "javascript.inlayHints.enumMemberValues.enabled": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.inlayHints.parameterNames.enabled": "literals",
-  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "typescript.inlayHints.enumMemberValues.enabled": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.tsserver.maxTsServerMemory": 4096,
+  "js/ts.inlayHints.parameterNames.enabled": "literals",
+  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
+  "js/ts.inlayHints.enumMemberValues.enabled": true,
+  "js/ts.updateImportsOnFileMove.enabled": "always",
+  "js/ts.tsserver.maxMemory": 4096,
 
   // python
   "python.analysis.inlayHints.callArgumentNames": "partial",
@@ -414,6 +454,10 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
+
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.action.toggleSidebarVisibility"
+  ],
 
   // github copilot
   "github.copilot.enable": {
