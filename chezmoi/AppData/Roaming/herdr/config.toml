@@ -10,6 +10,7 @@ status_indicators = "dots"
 copy_on_select = false
 sidebar_start_collapsed = true
 sidebar_collapsed_mode = "compact"
+pane_scrollbars = false
 
 [ui.sound]
 enabled = true
