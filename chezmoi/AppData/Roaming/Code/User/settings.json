@@ -88,7 +88,7 @@
         },
       ],
     },
-    "[OLED]": {
+    "[OLED Dark Modern]": {
       "textMateRules": [
         {
           "scope": ["meta.embedded", "source.groovy.embedded"],
@@ -501,4 +501,6 @@
       "text": "Prioritize correctness, security, regressions, edge cases, missing tests, convention violations, and unnecessary changes."
     },
   ],
+  "workbench.colorTheme": "OLED Dark Modern",
+  "chat.titleBar.openInAgentsWindow.enabled": false,
 }
