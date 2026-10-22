@@ -1,37 +1,37 @@
-  onboarding = false
+onboarding = false
 
-  [ui]
-  prompt_new_tab_name = false
-  confirm_close = false
-  status_indicators = "dots"
-  copy_on_select = false
-  sidebar_start_collapsed = true
-  sidebar_collapsed_mode = "compact"
+[ui]
+prompt_new_tab_name = false
+confirm_close = false
+status_indicators = "dots"
+copy_on_select = false
+sidebar_start_collapsed = true
+sidebar_collapsed_mode = "compact"
 
-  [ui.sound]
-  enabled = true
+[ui.sound]
+enabled = true
 
-  [keys]
-  prefix = "§"
-  new_workspace = "alt+t"
-  close_workspace = ""
-  new_tab = "ctrl+t"
-  close_tab = "ctrl+w"
-  goto = "ctrl+k"
-  previous_tab = "ctrl+left"
-  next_tab = "ctrl+right"
-  previous_workspace = "ctrl+up"
-  next_workspace = "ctrl+down"
-  focus_pane_left = "alt+left"
-  focus_pane_down = "alt+down"
-  focus_pane_up = "alt+up"
-  focus_pane_right = "alt+right"
-  split_vertical = "alt+backslash"
-  split_horizontal = "alt+minus"
-  close_pane = "alt+w"
-  cycle_pane_next = ""
-  cycle_pane_previous = ""
+[keys]
+prefix = "§"
+new_workspace = "alt+t"
+close_workspace = ""
+new_tab = "ctrl+t"
+close_tab = "ctrl+w"
+goto = "ctrl+k"
+previous_tab = "ctrl+left"
+next_tab = "ctrl+right"
+previous_workspace = "ctrl+up"
+next_workspace = "ctrl+down"
+focus_pane_left = "alt+left"
+focus_pane_down = "alt+down"
+focus_pane_up = "alt+up"
+focus_pane_right = "alt+right"
+split_vertical = "alt+backslash"
+split_horizontal = "alt+minus"
+close_pane = "alt+w"
+cycle_pane_next = ""
+cycle_pane_previous = ""
 
-  [theme]
-  name = "terminal"
-  auto_switch = false
+[theme]
+name = "terminal"
+auto_switch = false
