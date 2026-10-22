@@ -1,5 +1,8 @@
 onboarding = false
 
+[terminal]
+new_cwd = "follow"
+
 [ui]
 prompt_new_tab_name = false
 confirm_close = false
@@ -33,5 +36,5 @@ cycle_pane_next = ""
 cycle_pane_previous = ""
 
 [theme]
-name = "terminal"
+name = "one-dark"
 auto_switch = false
