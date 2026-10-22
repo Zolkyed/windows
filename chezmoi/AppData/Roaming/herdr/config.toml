@@ -1,34 +1,37 @@
-[ui]
-agent_panel_sort = "spaces"
-prompt_new_tab_name = false
-status_indicators = "dots"
-copy_on_select = false
+  onboarding = false
 
-[ui.sidebar.agents]
-row_gap = 1
-rows = [
-  ["state_icon", "workspace"],
-  ["tab"],
-]
+  [ui]
+  prompt_new_tab_name = false
+  confirm_close = false
+  status_indicators = "dots"
+  copy_on_select = false
+  sidebar_start_collapsed = true
+  sidebar_collapsed_mode = "compact"
 
-[ui.sidebar.spaces]
-row_gap = 1
-rows = [
-  ["state_icon", "workspace"],
-  ["branch"],
-]
+  [ui.sound]
+  enabled = true
 
-[ui.sound]
-enabled = true
+  [keys]
+  prefix = "§"
+  new_workspace = "alt+t"
+  close_workspace = ""
+  new_tab = "ctrl+t"
+  close_tab = "ctrl+w"
+  goto = "ctrl+k"
+  previous_tab = "ctrl+left"
+  next_tab = "ctrl+right"
+  previous_workspace = "ctrl+up"
+  next_workspace = "ctrl+down"
+  focus_pane_left = "alt+left"
+  focus_pane_down = "alt+down"
+  focus_pane_up = "alt+up"
+  focus_pane_right = "alt+right"
+  split_vertical = "alt+backslash"
+  split_horizontal = "alt+minus"
+  close_pane = "alt+w"
+  cycle_pane_next = ""
+  cycle_pane_previous = ""
 
-[keys]
-prefix = "§"
-new_tab = ["prefix+c", "ctrl+t"]
-close_tab = ["prefix+shift+x", "ctrl+w"]
-goto = ["prefix+g", "ctrl+k"]
-previous_tab = ["prefix+p", "ctrl+left"]
-next_tab = ["prefix+n", "ctrl+right"]
-previous_workspace = "ctrl+up"
-next_workspace = "ctrl+down"
-cycle_pane_next = ["prefix+tab", "alt+up"]
-cycle_pane_previous = ["prefix+shift+tab", "alt+down"]
+  [theme]
+  name = "terminal"
+  auto_switch = false
