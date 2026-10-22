@@ -1,0 +1,5 @@
+[tools]
+node = "lts"
+uv = "latest"
+cmake = "latest"
+ninja = "latest"
