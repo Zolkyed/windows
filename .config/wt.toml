@@ -1,0 +1,5 @@
+[aliases]
+copilot = "wt switch -x 'copilot --yolo' {{args}}"
+claude = "wt switch -x 'claude --dangerously-skip-permissions' {{args}}"
+codex = "wt switch -x 'codex --dangerously-bypass-approvals-and-sandbox' {{args}}"
+opencode = "wt switch -x 'opencode --yolo' {{args}}"
