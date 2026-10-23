@@ -14,6 +14,10 @@
   <img src="./assets/setup.png" alt="Windows development environment setup">
 </p>
 
+```json
+"workbench.editor.closeEmptyGroups": false
+```
+
 ---
 
 ## 🖥️ System Setup
