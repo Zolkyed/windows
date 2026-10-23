@@ -10,12 +10,20 @@
   <a href="https://github.com/Zolkyed/windows/commits/main/"><img src="https://img.shields.io/github/last-commit/Zolkyed/windows?style=for-the-badge&logo=github&logoColor=cba6f7&label=Last%20Commit&labelColor=11111b&color=cba6f7" alt="Last commit"></a>
 </p>
 
+---
+
+## 🧑‍💻 Visual Studio Code
+
 <p align="center">
   <img src="./assets/setup.png" alt="Windows development environment setup">
 </p>
 
+Keep empty editor groups open by adding this option to `settings.json`:
+
 ```json
-"workbench.editor.closeEmptyGroups": false
+{
+  "workbench.editor.closeEmptyGroups": false
+}
 ```
 
 ---
