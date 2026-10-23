@@ -198,7 +198,7 @@
   "editor.renderLineHighlight": "all",
   "editor.renderWhitespace": "none",
   "editor.linkedEditing": true,
-  "editor.stickyScroll.enabled": false,
+  "editor.stickyScroll.enabled": true,
 
   // terminal
   "workbench.panel.defaultLocation": "right",
@@ -212,6 +212,8 @@
   },
   "terminal.integrated.shellIntegration.enabled": true,
   "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.persistentSessionReviveProcess": "onExitAndWindowClose",
+  "terminal.integrated.hideOnStartup": "never",
   "terminal.integrated.scrollback": 10000,
   "terminal.integrated.tabs.enabled": true,
   "terminal.integrated.tabs.hideCondition": "never",
@@ -229,6 +231,8 @@
   "workbench.startupEditor": "none",
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "workbench.editor.openOnFocus": false,
+  "workbench.editor.closeEmptyGroups": false,
+  "workbench.editor.restoreViewState": true,
   "workbench.activityBar.location": "default",
   "workbench.tips.enabled": false,
   "window.commandCenter": false,
@@ -433,7 +437,7 @@
   // git
   "scm.alwaysShowRepositories": true,
   "git.suggestSmartCommit": false,
-  "git.confirmSync": false,
+  "git.confirmSync": true,
   "git.autofetch": true,
   "git.pruneOnFetch": true,
   "git.autoRepositoryDetection": "subFolders",
@@ -446,6 +450,7 @@
   },
   "git.mergeEditor": true,
   "diffEditor.codeLens": true,
+  "diffEditor.ignoreTrimWhitespace": false,
 
   // files
   "files.autoSave": "afterDelay",
