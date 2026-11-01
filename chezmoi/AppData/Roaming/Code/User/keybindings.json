@@ -109,7 +109,6 @@
         "workbench.action.toggleMaximizedPanel"
       ]
     },
-    "when": "!terminalEditorFocus"
   },
   // Quick Open (Chrome: Ctrl+L to focus address bar)
   {
