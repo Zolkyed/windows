@@ -17,7 +17,7 @@
 $^c:: {
     saved := ClipboardAll()
     A_Clipboard := ""
-    Send "^!+c"              ; terminal copy (bound in Visual Studio)
+    Send "^+c"              ; terminal copy (bound in Visual Studio)
     if ClipWait(0.15)        ; text was selected, so it copied
         return
     A_Clipboard := saved     ; nothing selected: restore clipboard
