@@ -100,6 +100,16 @@ This configuration defines custom keyboard shortcuts for various applications, m
 
 ---
 
+## 💻 Visual Studio (`Visual_Studio_CLI.ahk`)
+| Shortcut | Action |
+|----------|--------|
+| Ctrl + C | 📋 Copy the terminal selection, or pass a real Ctrl+C through (interrupt / editor copy) when nothing is selected |
+
+Requires binding the terminal **Copy** command to `Ctrl + Alt + Shift + C` (terminal scope) in
+Tools > Options > Environment > Keyboard. If Visual Studio runs elevated, run the script elevated too.
+
+---
+
 ## 📋 TODO
 1. 🔄 Support MQTT with HTTP fallback for IoT devices  
 2. 💡 Manage Lighting: Use a Smart Switch (API: Turn On/Off) and a Smart Bulb (API: Set Brightness & Change Color)
