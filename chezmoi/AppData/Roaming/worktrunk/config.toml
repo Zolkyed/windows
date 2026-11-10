@@ -1,3 +1,9 @@
 worktree-path = "{{ repo_path }}/.wortrees/{{ branch | sanitize }}"
 [pre-start]
 copy-ignored = "wt step copy-ignored --require-include"
+
+[aliases]
+copilot = "wt switch -x 'copilot --yolo' {{args}}"
+claude = "wt switch -x 'claude --dangerously-skip-permissions' {{args}}"
+codex = "wt switch -x 'codex --dangerously-bypass-approvals-and-sandbox' {{args}}"
+opencode = "wt switch -x 'opencode --yolo' {{args}}"
