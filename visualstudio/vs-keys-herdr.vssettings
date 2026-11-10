@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<UserSettings>
+  <ApplicationIdentity version="18.0" />
+  <ToolsOptions />
+  <Category name="Environment_Group" RegisteredName="Environment_Group">
+    <Category name="Environment_KeyBindings" Category="{F09035F1-80D2-4312-8EC4-4D354A4BCB4C}" Package="{DA9FB551-C724-11d0-AE1F-00A0C90FFFC3}" RegisteredName="Environment_KeyBindings" PackageName="CVsShellPackage">
+      <Version>18.0.0.0</Version>
+      <KeyboardShortcuts>
+        <ScopeDefinitions>
+          <Scope Name="Global" ID="{5EFC7975-14BC-11CF-9B2B-00AA00573819}" />
+          <Scope Name="Text Editor" ID="{8B382828-6202-11D1-8870-0000F87579D2}" />
+          <Scope Name="Terminal" ID="{D212F56B-C48A-434C-A121-1C5D80B59B9F}" />
+        </ScopeDefinitions>
+        <DefaultShortcuts>
+          <Shortcut Command="View.ViewCode" Scope="Global">F7</Shortcut>
+          <Shortcut Command="View.ViewDesigner" Scope="Global">Shift+F7</Shortcut>
+        </DefaultShortcuts>
+        <ShortcutsScheme/>
+        <UserShortcuts>
+          <RemoveShortcut Command="TestExplorer.ShowTestExplorer" Scope="Global">Ctrl+E, T</RemoveShortcut>
+          <RemoveShortcut Command="TestExplorer.SyncTestInContext" Scope="Global">Ctrl+E, S</RemoveShortcut>
+          <RemoveShortcut Command="View.CodeCoverageResults" Scope="Global">Ctrl+E, C</RemoveShortcut>
+          <RemoveShortcut Command="View.ShowStackTraceExplorer" Scope="Global">Ctrl+E, Ctrl+S</RemoveShortcut>
+          <RemoveShortcut Command="View.ShowTaskStatusCenter" Scope="Global">Ctrl+E, Ctrl+T</RemoveShortcut>
+          <RemoveShortcut Command="View.UnpublishedCommits" Scope="Global">Ctrl+E, Ctrl+C</RemoveShortcut>
+          <RemoveShortcut Command="Edit.SelectToLastGoBack" Scope="Text Editor">Ctrl+=</RemoveShortcut>
+          <RemoveShortcut Command="View.NavigateBackward" Scope="Global">Ctrl+-</RemoveShortcut>
+          <Shortcut Command="View.ZoomIn" Scope="Global">Ctrl+=</Shortcut>
+          <Shortcut Command="View.ZoomIn" Scope="Text Editor">Ctrl+=</Shortcut>
+          <Shortcut Command="View.ZoomIn" Scope="Terminal">Ctrl+=</Shortcut>
+          <Shortcut Command="View.ZoomOut" Scope="Global">Ctrl+-</Shortcut>
+          <Shortcut Command="View.ZoomOut" Scope="Text Editor">Ctrl+-</Shortcut>
+          <Shortcut Command="View.ZoomOut" Scope="Terminal">Ctrl+-</Shortcut>
+          <RemoveShortcut Command="Edit.NavigateTo" Scope="Global">Ctrl+T</RemoveShortcut>
+          <RemoveShortcut Command="Edit.NavigateTo" Scope="Text Editor">Ctrl+T</RemoveShortcut>
+          <RemoveShortcut Command="Edit.GoToAll" Scope="Global">Ctrl+T</RemoveShortcut>
+          <RemoveShortcut Command="Edit.GoToAll" Scope="Text Editor">Ctrl+T</RemoveShortcut>
+          <RemoveShortcut Command="Add.To.Chat" Scope="Global">Ctrl+T</RemoveShortcut>
+          <RemoveShortcut Command="Window.CloseDocumentWindow" Scope="Global">Ctrl+W</RemoveShortcut>
+          <Shortcut Command="Window.CloseDocumentWindow" Scope="Global">Ctrl+F4</Shortcut>
+          <Shortcut Command="Window.CloseDocumentWindow" Scope="Text Editor">Ctrl+W</Shortcut>
+        </UserShortcuts>
+      </KeyboardShortcuts>
+    </Category>
+  </Category>
+</UserSettings>
