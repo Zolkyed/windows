@@ -39,6 +39,8 @@
           <RemoveShortcut Command="Window.CloseDocumentWindow" Scope="Global">Ctrl+W</RemoveShortcut>
           <Shortcut Command="Window.CloseDocumentWindow" Scope="Global">Ctrl+F4</Shortcut>
           <Shortcut Command="Window.CloseDocumentWindow" Scope="Text Editor">Ctrl+W</Shortcut>
+          <RemoveShortcut Command="Edit.GoToText" Scope="Global">Shift+Alt+F</RemoveShortcut>
+          <Shortcut Command="Edit.FormatDocument" Scope="Text Editor">Shift+Alt+F</Shortcut>
         </UserShortcuts>
       </KeyboardShortcuts>
     </Category>
