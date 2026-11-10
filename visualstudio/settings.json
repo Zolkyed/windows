@@ -45,5 +45,6 @@
   "textEditor.general.stickyScroll.enable": true,
   "textEditor.general.display.bracePairColorization": true,
   "textEditor.general.display.blockStructure": true,
-  "projectsAndSolutions.general.trackActiveItem": true
+  "projectsAndSolutions.general.trackActiveItem": true,
+  "projectsAndSolutions.general.showOutputWindow": false
 }
