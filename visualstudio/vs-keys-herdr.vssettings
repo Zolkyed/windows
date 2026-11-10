@@ -41,6 +41,9 @@
           <Shortcut Command="Window.CloseDocumentWindow" Scope="Text Editor">Ctrl+W</Shortcut>
           <RemoveShortcut Command="Edit.GoToText" Scope="Global">Shift+Alt+F</RemoveShortcut>
           <Shortcut Command="Edit.FormatDocument" Scope="Text Editor">Shift+Alt+F</Shortcut>
+          <RemoveShortcut Command="Edit.NavigateTo" Scope="Global">Ctrl+P</RemoveShortcut>
+          <Shortcut Command="Edit.GoToFile" Scope="Global">Ctrl+P</Shortcut>
+          <Shortcut Command="Window.QuickLaunch" Scope="Global">Ctrl+Shift+P</Shortcut>
         </UserShortcuts>
       </KeyboardShortcuts>
     </Category>
