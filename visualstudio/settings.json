@@ -1,0 +1,49 @@
+/* Visual Studio Settings File */
+{
+  "windowsFormsDesigner.general.refactoring.enableRefactoringOnRename": true,
+  "languages.cpp.intelliSense.references.maxFindReferencesThreads": 14,
+  "languages.cpp.intelliSense.maximumCachedTranslationUnits": 15,
+  "languages.cpp.intelliSense.browsingNavigation.wholeCodebaseSemanticIndex.maximumWorkerThreads": 12,
+  "environment.visualExperience.systemLightTheme": "dark",
+  "environment.terminal.profiles+defaultItemIndex": 4,
+  "environment.terminal.profiles": [
+    {
+      "displayName": "Developer PowerShell 7",
+      "location": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "arguments": "-NoExit -Command \"& { Import-Module \"\"\"$env:VSAPPIDDIR\\..\\Tools\\Microsoft.VisualStudio.DevShell.dll\"\"\"; Enter-VsDevShell -SkipAutomaticLocation -SetDefaultWindowTitle -InstallPath $env:VSAPPIDDIR\\..\\..\\}\""
+    },
+    {
+      "displayName": "Developer PowerShell",
+      "location": "C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "arguments": "-NoExit -Command \"& { Import-Module \"\"\"$env:VSAPPIDDIR\\..\\Tools\\Microsoft.VisualStudio.DevShell.dll\"\"\"; Enter-VsDevShell -SkipAutomaticLocation -SetDefaultWindowTitle -InstallPath $env:VSAPPIDDIR\\..\\..\\}\""
+    },
+    {
+      "displayName": "Developer Command Prompt",
+      "location": "C:\\WINDOWS\\system32\\cmd.exe",
+      "arguments": "/k \"\"%VSAPPIDDIR%\\..\\Tools\\VsDevCmd.bat\""
+    },
+    {
+      "displayName": "Ubuntu",
+      "location": "C:\\WINDOWS\\system32\\wsl.exe",
+      "arguments": "-d Ubuntu"
+    },
+    {
+      "displayName": "Git Bash",
+      "location": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "arguments": "--login -i"
+    }
+  ],
+  "textEditor.inlayHints.enable": "always",
+  "environment.tabs.previewTab.singleClickPreviewInSolutionExplorer": false,
+  "textEditor.advanced.showFileLevelCodeLens": true,
+  "environment.documents.autoSave": true,
+  "environment.documents.detectFileChangesOutsideIde": true,
+  "environment.documents.autoLoadExternalChanges": true,
+  "languages.cpp.intelliSense.inlayHints.renderHints": true,
+  "textEditor.general.display.visibleWhitespace": false,
+  "debugging.general.enableDiagnosticToolsWindow": false,
+  "textEditor.general.stickyScroll.enable": true,
+  "textEditor.general.display.bracePairColorization": true,
+  "textEditor.general.display.blockStructure": true,
+  "projectsAndSolutions.general.trackActiveItem": true
+}
