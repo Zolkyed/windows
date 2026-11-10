@@ -34,7 +34,8 @@
     }
   ],
   "textEditor.inlayHints.enable": "always",
-  "environment.tabs.previewTab.singleClickPreviewInSolutionExplorer": false,
+  "environment.tabs.previewTab.enable": true,
+  "environment.tabs.previewTab.singleClickPreviewInSolutionExplorer": true,
   "textEditor.advanced.showFileLevelCodeLens": true,
   "environment.documents.autoSave": true,
   "environment.documents.detectFileChangesOutsideIde": true,
