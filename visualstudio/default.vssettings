@@ -47,6 +47,7 @@
           <RemoveShortcut Command="Edit.ShowClipboardHistory" Scope="Text Editor">Ctrl+Shift+V</RemoveShortcut>
           <Shortcut Command="Edit.Copy" Scope="Text Editor">Ctrl+Shift+C</Shortcut>
           <Shortcut Command="Edit.Paste" Scope="Text Editor">Ctrl+Shift+V</Shortcut>
+          <Shortcut Command="Terminal.Copy" Scope="Terminal">Ctrl+C</Shortcut>
         </UserShortcuts>
       </KeyboardShortcuts>
     </Category>
