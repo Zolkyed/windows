@@ -1,11 +1,11 @@
 [
-  // Open new tab (Chrome: Ctrl+T)
+  // Open new tab Editor (Chrome: Ctrl+T)
   {
     "key": "ctrl+t",
     "command": "workbench.action.files.newUntitledFile",
     "when": "!terminalFocus"
   },
-  // Close tab (Chrome: Ctrl+W)
+  // Close tab Editor (Chrome: Ctrl+W)
   {
     "key": "ctrl+w",
     "command": "workbench.action.closeActiveEditor",
@@ -34,11 +34,37 @@
   },
   {
     "key": "alt+left",
-    "command": "workbench.action.navigateLeft"
+    "command": "workbench.action.navigateLeft",
+    "when": "!terminalFocus"
   },
   {
     "key": "alt+right",
-    "command": "workbench.action.navigateRight"
+    "command": "workbench.action.navigateRight",
+    "when": "!terminalFocus"
+  },
+  {
+  "key": "alt+left",
+  "command": "workbench.action.terminal.sendSequence",
+  "args": { "text": "\u001b[1;3D" },
+  "when": "terminalFocus"
+  },
+  {
+    "key": "alt+right",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "\u001b[1;3C" },
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+up",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "\u001b[1;3A" },
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+down",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "\u001b[1;3B" },
+    "when": "terminalFocus"
   },
   // Jump to specific tab (Chrome: Ctrl+1..8)
   {
