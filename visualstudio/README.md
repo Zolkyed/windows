@@ -73,3 +73,15 @@ $dte.ExecuteCommand('Tools.ImportandExportSettings', '/import:"<path>\default.vs
 ```
 
 Applies live, no restart. Verify by reading `.Bindings` off `$dte.Commands`.
+
+## Exporting
+
+To capture the current keybindings and menu customizations (including those made on
+**Tools → Customize → Commands**) into a `.vssettings` file:
+
+1. Open **Tools → Import and Export Settings…**
+2. Choose **Export selected environment settings** and click **Next**.
+3. In the tree, clear everything, then check **All Settings → General Settings → Menu and
+   Command Bar Customizations**. Also check **All Settings → Options → Environment →
+   Keyboard** if you want your shortcut changes too.
+4. Choose a file name and location, then click **Finish**.
