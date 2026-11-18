@@ -18,9 +18,7 @@ To reopen the most recently used solution at startup:
 `default.vssettings` moves Visual Studio towards VS Code muscle memory and keeps the
 integrated terminal usable for shell and TUI work. Stock bindings not listed stay as they are.
 
-The live keybindings are stored in `privateregistry.bin` and auto-saved to
-`%LOCALAPPDATA%\Microsoft\VisualStudio\18.0_<hash>\Settings\CurrentSettings.vssettings`
-(inside `<KeyboardShortcuts>`), which is the file to diff against `default.vssettings`.
+Live copy: `%LOCALAPPDATA%\Microsoft\VisualStudio\18.0_<hash>\Settings\CurrentSettings.vssettings`
 
 | Key | Scope | Command | Notes |
 | --- | --- | --- | --- |
