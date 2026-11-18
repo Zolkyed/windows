@@ -24,8 +24,8 @@ VS Code muscle memory, terminal left usable for shell and TUI. Unlisted bindings
 | `Ctrl+W` | Text Editor | `Window.CloseDocumentWindow` | Terminal keeps delete-word |
 | `Ctrl+F4` | Global | `Window.CloseDocumentWindow` | |
 | `Shift+Alt+F` | Text Editor | `Edit.FormatDocument` | |
-| `Ctrl+Alt+Left` | Terminal | `Window.MovetoPreviousTabGroup` | Terminal fills editor area |
-| `Ctrl+Alt+Right` | Terminal | `Window.NewVerticalTabGroup` | Terminal back to the right |
+| `Ctrl+Alt+Left` | Terminal | `Window.Float` | Float terminal; maximize once (`Win+Up`), VS remembers |
+| `Ctrl+Alt+Right` | Terminal | `Window.Dock` | Back to its docked spot |
 
 ### Removed
 
