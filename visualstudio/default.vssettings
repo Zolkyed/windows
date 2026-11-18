@@ -48,8 +48,6 @@
           <Shortcut Command="Edit.Copy" Scope="Text Editor">Ctrl+Shift+C</Shortcut>
           <Shortcut Command="Edit.Paste" Scope="Text Editor">Ctrl+Shift+V</Shortcut>
           <Shortcut Command="Terminal.Copy" Scope="Terminal">Ctrl+C</Shortcut>
-          <Shortcut Command="Window.MovetoPreviousTabGroup" Scope="Terminal">Ctrl+Alt+Left Arrow</Shortcut>
-          <Shortcut Command="Window.NewVerticalTabGroup" Scope="Terminal">Ctrl+Alt+Right Arrow</Shortcut>
         </UserShortcuts>
       </KeyboardShortcuts>
     </Category>
