@@ -1,14 +1,9 @@
 # Windows Terminal
 
-Target: `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`
+| File | Target | Apply |
+| --- | --- | --- |
+| `settings.json` | `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json` | copy |
 
 ## Keybindings
 
-Unbind pane focus so `Alt+Arrow` reaches the shell/TUI (word movement). Add to `"keybindings"`:
-
-```json
-{ "id": null, "keys": "alt+left" },
-{ "id": null, "keys": "alt+right" },
-{ "id": null, "keys": "alt+up" },
-{ "id": null, "keys": "alt+down" }
-```
+`Alt+Arrow` pane focus is unbound (`"id": null`) so it reaches the shell/TUI for word movement.
