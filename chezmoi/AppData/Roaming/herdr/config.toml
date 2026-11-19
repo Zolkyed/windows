@@ -7,13 +7,14 @@ new_cwd = "follow"
 prompt_new_tab_name = false
 confirm_close = false
 status_indicators = "dots"
-copy_on_select = false
+copy_on_select = true
 sidebar_start_collapsed = true
 sidebar_collapsed_mode = "compact"
-pane_scrollbars = false
+pane_scrollbars = true
+tab_bar_position = "bottom"
 
 [ui.sound]
-enabled = true
+enabled = false
 
 [keys]
 prefix = "§"
