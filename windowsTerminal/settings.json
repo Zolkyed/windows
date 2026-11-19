@@ -1,8 +1,12 @@
-{
-    "keybindings": [
-        { "id": null, "keys": "alt+left" },
-        { "id": null, "keys": "alt+right" },
-        { "id": null, "keys": "alt+up" },
-        { "id": null, "keys": "alt+down" }
-    ]
-}
+"keybindings":
+[
+    { "id": "Terminal.CopyToClipboard", "keys": "ctrl+c" },
+    { "id": "Terminal.PasteFromClipboard", "keys": "ctrl+v" },
+    { "id": "Terminal.DuplicatePaneAuto", "keys": "alt+shift+d" },
+    { "id": null, "keys": "alt+left" },
+    { "id": null, "keys": "alt+right" },
+    { "id": null, "keys": "alt+up" },
+    { "id": null, "keys": "alt+down" },
+    { "id": null, "keys": "ctrl+t" },
+    { "id": null, "keys": "ctrl+w" }
+],
