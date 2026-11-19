@@ -148,14 +148,14 @@
     // "editorOverviewRuler.deletedForeground": "#0000",
     // "editorOverviewRuler.warningForeground": "#0000",
     // "editorOverviewRuler.errorForeground": "#0000",
+    // "editorOverviewRuler.findMatchForeground": "#0000",
     "editorOverviewRuler.infoForeground": "#0000",
     "editorOverviewRuler.bracketMatchForeground": "#0000",
     "editorOverviewRuler.commentForeground": "#0000",
     "editorOverviewRuler.commentUnresolvedForeground": "#0000",
-    "editorOverviewRuler.currentContentForeground": "#0000",
+    // "editorOverviewRuler.currentContentForeground": "#0000",
     "editorOverviewRuler.commonContentForeground": "#0000",
-    "editorOverviewRuler.incomingContentForeground": "#0000",
-    "editorOverviewRuler.findMatchForeground": "#0000",
+    // "editorOverviewRuler.incomingContentForeground": "#0000",
     "editorOverviewRuler.rangeHighlightForeground": "#0000",
     "editorOverviewRuler.selectionHighlightForeground": "#0000",
     "editorOverviewRuler.wordHighlightForeground": "#0000",
@@ -165,7 +165,7 @@
   "editor.hideCursorInOverviewRuler": true,
   "debug.showBreakpointsInOverviewRuler": true,
   "editor.minimap.enabled": false,
-  "editor.scrollbar.verticalScrollbarSize": 13,
+  "editor.scrollbar.verticalScrollbarSize": 10,
   "editor.scrollbar.vertical": "auto",
   "editor.scrollbar.horizontalScrollbarSize": 10,
   "editor.scrollbar.horizontal": "auto",
@@ -179,10 +179,12 @@
   "workbench.iconTheme": "material-icon-theme",
 
   // color brackets
-  "editor.guides.bracketPairs": "active",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
   "editor.guides.bracketPairsHorizontal": true, // (____)
   "editor.guides.highlightActiveBracketPair": true,
   "editor.guides.highlightActiveIndentation": "always",
+  "editor.guides.indentation": true,
 
   // cursor
   "editor.cursorStyle": "line",
@@ -346,11 +348,16 @@
   },
 
   // javascript / typescript
-  "js/ts.inlayHints.parameterNames.enabled": "literals",
+  "js/ts.inlayHints.parameterNames.enabled": "all",
+  "js/ts.inlayHints.variableTypes.enabled": true,
   "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
+  "js/ts.inlayHints.propertyDeclarationTypes.enabled": true,
   "js/ts.inlayHints.enumMemberValues.enabled": true,
-  "js/ts.updateImportsOnFileMove.enabled": "always",
   "js/ts.tsserver.maxMemory": 4096,
+
+  // Inlay hints
+  "editor.inlayHints.enabled": "on",
+
 
   // python
   "python.analysis.inlayHints.callArgumentNames": "partial",
