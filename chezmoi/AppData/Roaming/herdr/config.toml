@@ -2,6 +2,7 @@ onboarding = false
 
 [terminal]
 new_cwd = "follow"
+default_shell = 'C:\Program Files\Git\bin\bash.exe'
 
 [ui]
 prompt_new_tab_name = false
@@ -12,6 +13,7 @@ sidebar_start_collapsed = true
 sidebar_collapsed_mode = "compact"
 pane_scrollbars = true
 tab_bar_position = "bottom"
+accent = "green"
 
 [ui.sound]
 enabled = false
