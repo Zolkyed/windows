@@ -143,25 +143,29 @@
       "editor.background": "#121212",
     },
     // scrollbar (https://stackoverflow.com/questions/59002585/how-can-i-remove-symbols-on-right-scrollbar-of-vscode)
+    // Overview Ruler — keep Git, diagnostics, and search
     // "editorOverviewRuler.addedForeground": "#0000",
     // "editorOverviewRuler.modifiedForeground": "#0000",
     // "editorOverviewRuler.deletedForeground": "#0000",
     // "editorOverviewRuler.warningForeground": "#0000",
     // "editorOverviewRuler.errorForeground": "#0000",
     // "editorOverviewRuler.findMatchForeground": "#0000",
+
+    // Hide other markers
     "editorOverviewRuler.infoForeground": "#0000",
     "editorOverviewRuler.bracketMatchForeground": "#0000",
     "editorOverviewRuler.commentForeground": "#0000",
     "editorOverviewRuler.commentUnresolvedForeground": "#0000",
-    // "editorOverviewRuler.currentContentForeground": "#0000",
+    "editorOverviewRuler.currentContentForeground": "#0000",
     "editorOverviewRuler.commonContentForeground": "#0000",
-    // "editorOverviewRuler.incomingContentForeground": "#0000",
+    "editorOverviewRuler.incomingContentForeground": "#0000",
     "editorOverviewRuler.rangeHighlightForeground": "#0000",
     "editorOverviewRuler.selectionHighlightForeground": "#0000",
     "editorOverviewRuler.wordHighlightForeground": "#0000",
     "editorOverviewRuler.wordHighlightStrongForeground": "#0000",
     "editorOverviewRuler.wordHighlightTextForeground": "#0000",
   },
+  // scrollbar
   "editor.hideCursorInOverviewRuler": true,
   "debug.showBreakpointsInOverviewRuler": true,
   "editor.minimap.enabled": false,
@@ -186,10 +190,12 @@
   "editor.guides.highlightActiveIndentation": "always",
   "editor.guides.indentation": true,
 
-  // cursor
+  // Cursor
   "editor.cursorStyle": "line",
   "editor.cursorBlinking": "solid",
   "editor.cursorWidth": 2,
+
+  // Terminal cursor
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.cursorBlinking": false,
   "terminal.integrated.cursorStyleInactive": "none",
@@ -232,14 +238,12 @@
   "workbench.settings.editor": "json",
   "workbench.startupEditor": "none",
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
-  "workbench.editor.openOnFocus": false,
   "workbench.editor.closeEmptyGroups": false,
   "workbench.editor.restoreViewState": true,
   "workbench.activityBar.location": "default",
   "workbench.tips.enabled": false,
   "window.commandCenter": false,
   "window.title": " ",
-  "chat.commandCenter.enabled": false,
 
   // file tree
   "workbench.tree.renderIndentGuides": "always",
@@ -274,6 +278,7 @@
   "editor.formatOnSave": false,
   "editor.formatOnType": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // prettier
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
@@ -337,14 +342,12 @@
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt",
     "editor.tabSize": 2,
-    "shfmt.indent": 2,
   },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
   },
   "[terraform]": {
-    "editor.defaultFormatter": "hashicorp.terraform",
-    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "hashicorp.terraform"
   },
 
   // javascript / typescript
@@ -375,69 +378,39 @@
   "markdown.preview.scrollEditorWithPreview": true,
   "markdown.preview.scrollPreviewWithEditor": true,
 
-  // excludes
+  // Exclude file watching
   "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/tmp/**": true,
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/dist/**": true,
-    "**/log/**": true,
-    "**/logs/**": true,
-    "**/.fdk/**": true,
-    "**/__pycache__/**": true,
-    "**/.terraform/**": true,
-    "**/.venv/**": true,
-    "**/.ruff_cache/**": true,
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/**": true,
+      "**/dist/**": true,
+      "**/.terraform/**": true,
+      "**/.venv/**": true,
+      "**/__pycache__/**": true
   },
+
+  // Hide files in Explorer
   "files.exclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/tmp/**": true,
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/dist/**": true,
-    "**/log/**": true,
-    "**/logs/**": true,
-    "**/.fdk/**": true,
-    "**/__pycache__/**": true,
-    "**/.terraform/**": true,
-    "**/.venv/**": true,
-    "**/.ruff_cache/**": true,
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/dist": true,
+      "**/__pycache__": true,
+      "**/.terraform": true,
+      "**/.venv": true,
+      "**/.ruff_cache": true
   },
+
+  // Exclude from search
   "search.exclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/tmp/**": true,
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/dist/**": true,
-    "**/log/**": true,
-    "**/logs/**": true,
-    "**/.fdk/**": true,
-    "**/__pycache__/**": true,
-    "**/.terraform/**": true,
-    "**/.venv/**": true,
-    "**/.ruff_cache/**": true,
+      "**/tmp/**": true,
+      "**/log/**": true,
+      "**/logs/**": true,
+      "**/.fdk/**": true
   },
 
   // git
@@ -452,7 +425,7 @@
   "git.showActionButton": {
     "commit": true,
     "publish": true,
-    "sync": true,
+    "sync": false,
   },
   "git.mergeEditor": true,
   "diffEditor.codeLens": true,
