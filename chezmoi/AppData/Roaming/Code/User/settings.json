@@ -358,7 +358,6 @@
   // Inlay hints
   "editor.inlayHints.enabled": "on",
 
-
   // python
   "python.analysis.inlayHints.callArgumentNames": "partial",
   "python.analysis.inlayHints.functionReturnTypes": true,
