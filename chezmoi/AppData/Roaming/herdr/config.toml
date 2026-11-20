@@ -14,6 +14,7 @@ sidebar_collapsed_mode = "compact"
 pane_scrollbars = true
 tab_bar_position = "bottom"
 accent = "green"
+hidden = true
 
 [ui.sound]
 enabled = false
